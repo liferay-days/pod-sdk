@@ -1,0 +1,41 @@
+apply plugin: 'java'
+
+repositories {
+    jcenter()
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+
+/**
+ * Liferay Source Formatter.
+ **/
+configure(subprojects.findAll { it.name }) {
+	repositories {
+		maven {
+			mavenLocal()
+			mavenCentral()
+			url 'https://repository.liferay.com/nexus/content/groups/liferay-ce'
+		}
+	}
+
+	configurations {
+		formatter
+	}
+
+	dependencies {
+		formatter 'com.liferay.portal:portal-impl:7.0.0-m3'
+		formatter 'com.liferay.portal:portal-service:7.0.0-m3'
+		formatter 'com.liferay.portal:util-java:7.0.0-m3'
+		formatter 'com.thoughtworks.qdox:qdox:1.9.2'
+		formatter 'dom4j:dom4j:1.6.1'
+		formatter 'org.apache.ant:ant:1.8.2'
+	}
+
+	task format(type: JavaExec) {
+		main = 'com.liferay.portal.tools.sourceformatter.SourceFormatter'
+		classpath = configurations.formatter
+		workingDir = 'src'
+	}
+}

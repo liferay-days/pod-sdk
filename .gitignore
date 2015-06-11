@@ -1,0 +1,14 @@
+bin
+build
+classes
+coverage
+
+.classpath
+.gradle
+.idea
+.project
+.settings
+
+gradle.properties
+
+*.iml
