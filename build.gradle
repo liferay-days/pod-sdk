@@ -1,4 +1,18 @@
+plugins {
+    id "com.jfrog.bintray" version "1.2"
+}
+
+version = '0.1.0'
+group = 'com.liferay.launchpad'
+
+ext {
+    gradleScriptDir = "${rootProject.projectDir}/gradle"
+}
+
 apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'com.jfrog.bintray'
+apply from: "${gradleScriptDir}/bintray.gradle"
 
 repositories {
     jcenter()
@@ -7,6 +21,30 @@ repositories {
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
+configurations {
+    published
+}
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+    version = rootProject.version
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    version = rootProject.version
+    from javadoc.destinationDir
+}
+
+artifacts {
+    published sourceJar
+    published javadocJar
+}
+
+jar.dependsOn sourceJar
+jar.dependsOn javadocJar
+jar.version = version
 
 /**
  * Liferay Source Formatter.
