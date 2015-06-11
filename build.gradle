@@ -11,7 +11,7 @@ targetCompatibility = JavaVersion.VERSION_1_8
 /**
  * Liferay Source Formatter.
  **/
-configure(subprojects.findAll { it.name }) {
+configure(projects.findAll { it.name }) {
 	repositories {
 		maven {
 			mavenLocal()
