@@ -36,11 +36,6 @@ public interface PodContext {
 	String name();
 
 	/**
-	 * Returns {@link PodRuntime runtime} instance if one is specified.
-	 */
-	PodRuntime runtime();
-
-	/**
 	 * Loads Java resource from context classloader.
 	 */
 	InputStream openJavaResource(String name) throws IOException;

@@ -13,8 +13,7 @@
 package com.liferay.launchpad.sdk;
 
 /**
- * Runtime interface is a singleton in a pods realm. It may be injected into
- * the pod action via constructor.
+ * Runtime interface is a singleton in a pods context.
  */
 public interface PodRuntime {
 
