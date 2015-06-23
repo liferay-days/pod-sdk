@@ -19,102 +19,102 @@ import java.util.List;
  */
 public interface SocketEventEmitter {
 
-	/**
-	 * Listen on the given `event` with listener `fn`.
-	 */
-	SocketEventEmitter on(String event, SocketListener fn);
-
-	default SocketEventEmitter addEventListener(
+	public default SocketEventEmitter addEventListener(
 		String event, SocketListener fn) {
 
 		return this.on(event, fn);
 	}
 
 	/**
-	 * Adds an `event` listener that will be invoked a single
-	 * time then automatically removed.
-	 */
-	SocketEventEmitter once(String event, SocketListener fn);
-
-	/**
-	 * Remove all registered listeners.
-	 */
-	SocketEventEmitter off();
-
-	/**
-	 * Aliases of off().
-	 */
-	default SocketEventEmitter removeListener() {
-		return this.off();
-	}
-
-	default SocketEventEmitter removeAllListeners() {
-		return this.off();
-	}
-
-	default SocketEventEmitter removeEventListener() {
-		return this.off();
-	}
-
-	/**
-	 * Remove the given callback for `event`.
-	 */
-	SocketEventEmitter off(String event);
-
-	/**
-	 * Aliases of off(event).
-	 */
-	default SocketEventEmitter removeListener(String event) {
-		return this.off(event);
-	}
-
-	default SocketEventEmitter removeAllListeners(String event) {
-		return this.off(event);
-	}
-
-	default SocketEventEmitter removeEventListener(String event) {
-		return this.off(event);
-	}
-
-	/**
-	 * Remove the given callback for `event`.
-	 */
-	SocketEventEmitter off(String event, SocketListener fn);
-
-	/**
-	 * Aliases of off(event, fn).
-	 */
-	default SocketEventEmitter removeListener(
-		String event, SocketListener fn) {
-
-		return this.off(event, fn);
-	}
-
-	default SocketEventEmitter removeAllListeners(
-		String event, SocketListener fn) {
-
-		return this.off(event, fn);
-	}
-
-	default SocketEventEmitter removeEventListener(
-		String event, SocketListener fn) {
-
-		return this.off(event, fn);
-	}
-
-	/**
 	 * Emits `event` with the given args.
 	 */
-	SocketEventEmitter emit(String event, Object... args);
-
-	/**
-	 * Returns an array of listeners for `event`.
-	 */
-	List<SocketListener> listeners(String event);
+	public SocketEventEmitter emit(String event, Object... args);
 
 	/**
 	 * Checks if this emitter has `event` handlers.
 	 */
-	boolean hasListeners(String event);
+	public boolean hasListeners(String event);
+
+	/**
+	 * Returns an array of listeners for `event`.
+	 */
+	public List<SocketListener> listeners(String event);
+
+	/**
+	 * Remove all registered listeners.
+	 */
+	public SocketEventEmitter off();
+
+	/**
+	 * Remove the given callback for `event`.
+	 */
+	public SocketEventEmitter off(String event);
+
+	/**
+	 * Remove the given callback for `event`.
+	 */
+	public SocketEventEmitter off(String event, SocketListener fn);
+
+	/**
+	 * Listen on the given `event` with listener `fn`.
+	 */
+	public SocketEventEmitter on(String event, SocketListener fn);
+
+	/**
+	 * Adds an `event` listener that will be invoked a single
+	 * time then automatically removed.
+	 */
+	public SocketEventEmitter once(String event, SocketListener fn);
+
+	public default SocketEventEmitter removeAllListeners() {
+		return this.off();
+	}
+
+	public default SocketEventEmitter removeAllListeners(String event) {
+		return this.off(event);
+	}
+
+	public default SocketEventEmitter removeAllListeners(
+		String event, SocketListener fn) {
+
+		return this.off(event, fn);
+	}
+
+	public default SocketEventEmitter removeEventListener() {
+		return this.off();
+	}
+
+	public default SocketEventEmitter removeEventListener(String event) {
+		return this.off(event);
+	}
+
+	public default SocketEventEmitter removeEventListener(
+		String event, SocketListener fn) {
+
+		return this.off(event, fn);
+	}
+
+	/**
+	 * Aliases of off().
+	 */
+	public default SocketEventEmitter removeListener() {
+		return this.off();
+	}
+
+	/**
+	 * Aliases of off(event).
+	 */
+	public default SocketEventEmitter removeListener(String event) {
+		return this.off(event);
+	}
+
+	/**
+	 * Aliases of off(event, fn).
+	 */
+	public default SocketEventEmitter removeListener(
+		String event, SocketListener fn) {
+
+		return this.off(event, fn);
+	}
 
 }

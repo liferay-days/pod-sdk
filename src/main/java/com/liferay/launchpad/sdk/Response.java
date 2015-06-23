@@ -20,78 +20,78 @@ import java.util.Map;
 public interface Response {
 
 	/**
-	 * Returns the context that this response belongs to.
-	 */
-	PodContext context();
-
-	/**
 	 * Returns body content.
 	 */
-	String body();
-
-	/**
-	 * Returns status code.
-	 */
-	int statusCode();
-
-	/**
-	 * Returns headers.
-	 */
-	Map<String, String> headers();
-
-	/**
-	 * Returns the first header value with the specified name
-	 */
-	String header(String headerName);
-
-	/**
-	 * Sets the first header name with the specified value
-	 */
-	Response header(String headerName, String headerValue);
-
-	/**
-	 * Sets the content type header.
-	 */
-	default Response header(ContentType contentType) {
-		header("Content-Type", contentType.contentType());
-		return this;
-	}
-
-	/**
-	 * Returns <code>true</code> if response is already committed.
-	 */
-	boolean isCommitted();
-
-	/**
-	 * Returns status message.
-	 */
-	String statusMessage();
+	public String body();
 
 	/**
 	 * Sets the body content. Body content can be set only once. Setting the
 	 * body {@link #end() closes} the response.
 	 */
-	void body(String body);
+	public void body(String body);
 
 	/**
 	 * Sets the body content and common {@link ContentType content-type}.
 	 * Just a shortcut call.
 	 */
-	default void body(String body, ContentType contentType) {
+	public default void body(String body, ContentType contentType) {
 		header(contentType);
 		body(body);
 	}
 
 	/**
+	 * Returns the context that this response belongs to.
+	 */
+	public PodContext context();
+
+	/**
 	 * Closes the response. Shortcut for {@code body(null)}.
 	 */
-	default void end() {
+	public default void end() {
 		body(null);
 	}
 
 	/**
+	 * Sets the content type header.
+	 */
+	public default Response header(ContentType contentType) {
+		header("Content-Type", contentType.contentType());
+		return this;
+	}
+
+	/**
+	 * Returns the first header value with the specified name
+	 */
+	public String header(String headerName);
+
+	/**
+	 * Sets the first header name with the specified value
+	 */
+	public Response header(String headerName, String headerValue);
+
+	/**
+	 * Returns headers.
+	 */
+	public Map<String, String> headers();
+
+	/**
+	 * Returns <code>true</code> if response is already committed.
+	 */
+	public boolean isCommitted();
+
+	/**
 	 * Sets the response status code and message.
 	 */
-	Response status(int statusCode, String statusMessage);
+	public Response status(int statusCode, String statusMessage);
+
+	/**
+	 * Returns status code.
+	 */
+	public int statusCode();
+
+	/**
+	 * Returns status message.
+	 */
+	public String statusMessage();
 
 }

@@ -20,21 +20,21 @@ public interface FileUpload {
 	/**
 	 * Returns file name as provided in form submission.
 	 */
-	String fileName();
+	public String fileName();
 
 	/**
 	 * Returns name as provided in form submission.
 	 */
-	String name();
+	public String name();
 
 	/**
 	 * Files size.
 	 */
-	long size();
+	public long size();
 
 	/**
 	 * File name of uploaded file, stored locally.
 	 */
-	String uploadedFileName();
+	public String uploadedFileName();
 
 }

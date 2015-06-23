@@ -20,16 +20,16 @@ public interface Socket extends SocketEventEmitter {
 	/**
 	 * Sets broadcast flag to true.
 	 */
-	Socket broadcast();
-
-	/**
-	 * Stores the value with the specified key.
-	 */
-	void set(String key, Object value);
+	public Socket broadcast();
 
 	/**
 	 * Returns the value stored with the specified key.
 	 */
-	Object get(String key);
+	public Object get(String key);
+
+	/**
+	 * Stores the value with the specified key.
+	 */
+	public void set(String key, Object value);
 
 }

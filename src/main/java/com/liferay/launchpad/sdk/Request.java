@@ -20,68 +20,68 @@ public interface Request {
 	/**
 	 * Returns path argument at given index.
 	 */
-	String argument(int index);
+	public String argument(int index);
 
 	/**
 	 * Returns path argument for given name.
 	 */
-	String argument(String name);
+	public String argument(String name);
 
 	/**
 	 * Returns arguments count.
 	 */
-	int argumentsCount();
-
-	/**
-	 * Returns the absolute URL corresponding to the the HTTP request.
-	 */
-	String url();
+	public int argumentsCount();
 
 	/**
 	 * Returns the base URL corresponding to the the HTTP request.
 	 */
-	String baseUrl();
+	public String baseUrl();
 
 	/**
-	 * Returns headers.
+	 * Returns the body content.
 	 */
-	PodMultiMap headers();
+	public String body();
+
+	/**
+	 * Returns the context that this request belongs to.
+	 */
+	public PodContext context();
 
 	/**
 	 * Returns array of uploaded files. Returns <code>null</code> if nothing
 	 * was uploaded.
 	 */
-	FileUpload[] fileUploads();
+	public FileUpload[] fileUploads();
 
 	/**
-	 * Returns the body content.
+	 * Returns headers.
 	 */
-	String body();
-
-	/**
-	 * Returns request parameters.
-	 */
-	PodMultiMap params();
-
-	/**
-	 * Returns the context that this request belongs to.
-	 */
-	PodContext context();
+	public PodMultiMap headers();
 
 	/**
 	 * Returns HTTP method, in uppercase.
 	 */
-	String method();
+	public String method();
+
+	/**
+	 * Returns request parameters.
+	 */
+	public PodMultiMap params();
 
 	/**
 	 * Returns action path of the URI. Returned path does not contain the query
 	 * part. Returns <code>"/"</code> for the root.
 	 */
-	String path();
+	public String path();
 
 	/**
 	 * Returns associated response of this request.
 	 */
-	Response response();
+	public Response response();
+
+	/**
+	 * Returns the absolute URL corresponding to the the HTTP request.
+	 */
+	public String url();
 
 }
