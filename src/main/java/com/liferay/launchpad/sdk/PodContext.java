@@ -25,42 +25,42 @@ import java.util.Map;
 public interface PodContext {
 
 	/**
-	 * Returns user configuration or <code>null</code> if no configuration is
-	 * specified.
-	 */
-	Map<String, Object> configuration();
-
-	/**
-	 * Returns context name.
-	 */
-	String name();
-
-	/**
-	 * Loads Java resource from context classloader.
-	 */
-	InputStream openJavaResource(String name) throws IOException;
-
-	/**
 	 * Returns assets file from <code>assets</code> folder.
 	 */
-	File assetsFile(String fileName);
+	public File assetsFile(String fileName);
 
 	/**
 	 * Returns assets files from <code>assets</code> folder that matches
 	 * provided <i>wildcard</i> glob patterns.
 	 */
-	List<File> assetsFiles(String... glob);
+	public List<File> assetsFiles(String... glob);
+
+	/**
+	 * Returns user configuration or <code>null</code> if no configuration is
+	 * specified.
+	 */
+	public Map<String, Object> configuration();
+
+	/**
+	 * Returns context name.
+	 */
+	public String name();
+
+	/**
+	 * Loads Java resource from context classloader.
+	 */
+	public InputStream openJavaResource(String name) throws IOException;
 
 	/**
 	 * Returns single file from <code>web</code> folder. Returns
 	 * <code>null</code> if file does not exist.
 	 */
-	File webFile(String fileName);
+	public File webFile(String fileName);
 
 	/**
 	 * Returns static files from <code>web</code> folder that matches provided
 	 * <i>wildcard</i> glob patterns.
 	 */
-	List<File> webFiles(String... glob);
+	public List<File> webFiles(String... glob);
 
 }

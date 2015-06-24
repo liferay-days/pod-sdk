@@ -17,6 +17,6 @@ package com.liferay.launchpad.sdk.io;
  */
 public interface SocketIO {
 
-	SocketNamespace on(String event, SocketListener fn);
+	public SocketNamespace on(String event, SocketListener fn);
 
 }

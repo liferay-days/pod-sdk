@@ -18,6 +18,6 @@ package com.liferay.launchpad.sdk.io;
 @FunctionalInterface
 public interface SocketListener {
 
-	void call(Object... args);
+	public void call(Object... args);
 
 }

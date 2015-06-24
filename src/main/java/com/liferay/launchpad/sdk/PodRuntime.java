@@ -20,11 +20,11 @@ public interface PodRuntime {
 	/**
 	 * Called when pod is deployed, loaded and started.
 	 */
-	void start(PodContext context);
+	public void start(PodContext context);
 
 	/**
 	 * Called when pod is about to be stopped and undeployed.
 	 */
-	void stop(PodContext context);
+	public void stop(PodContext context);
 
 }

@@ -10,26 +10,10 @@
  * Lesser General Public License for more details.
  */
 
-package com.liferay.launchpad.sdk.io;
+package com.liferay.launchpad.sdk.log;
 
-/**
- * SocketIO socket.
- */
-public interface Socket extends SocketEventEmitter {
+public interface PodLoggerFactoryInterface {
 
-	/**
-	 * Sets broadcast flag to true.
-	 */
-	public Socket broadcast();
-
-	/**
-	 * Returns the value stored with the specified key.
-	 */
-	public Object get(String key);
-
-	/**
-	 * Stores the value with the specified key.
-	 */
-	public void set(String key, Object value);
+	public PodLogger getLogger(String name);
 
 }
