@@ -18,21 +18,6 @@ package com.liferay.launchpad.sdk;
 public interface Request {
 
 	/**
-	 * Returns path argument at given index.
-	 */
-	public String argument(int index);
-
-	/**
-	 * Returns path argument for given name.
-	 */
-	public String argument(String name);
-
-	/**
-	 * Returns arguments count.
-	 */
-	public int argumentsCount();
-
-	/**
 	 * Returns the base URL corresponding to the the HTTP request.
 	 */
 	public String baseUrl();
