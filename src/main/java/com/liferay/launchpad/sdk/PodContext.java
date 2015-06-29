@@ -36,6 +36,11 @@ public interface PodContext {
 	public List<File> assetsFiles(String... glob);
 
 	/**
+	 * Returns base path of this pod.
+	 */
+	public String basePath();
+
+	/**
 	 * Returns user configuration or <code>null</code> if no configuration is
 	 * specified.
 	 */
