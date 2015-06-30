@@ -15,7 +15,7 @@ package com.liferay.launchpad.sdk;
 /**
  * HTTP request.
  */
-public interface Request {
+public interface Request<T extends Request> {
 
 	/**
 	 * Returns the base URL corresponding to the the HTTP request.
@@ -26,6 +26,11 @@ public interface Request {
 	 * Returns the body content.
 	 */
 	public String body();
+
+	/**
+	 * Sets the body content.
+	 */
+	public T body(String body);
 
 	/**
 	 * Returns the context that this request belongs to.
@@ -39,6 +44,11 @@ public interface Request {
 	public FileUpload[] fileUploads();
 
 	/**
+	 * Sets header value.
+	 */
+	public T header(String name, String value);
+
+	/**
 	 * Returns headers.
 	 */
 	public PodMultiMap headers();
@@ -47,6 +57,16 @@ public interface Request {
 	 * Returns HTTP method, in uppercase.
 	 */
 	public String method();
+
+	/**
+	 * Sets method.
+	 */
+	public T method(String method);
+
+	/**
+	 * Sets parameter value.
+	 */
+	public T param(String name, String value);
 
 	/**
 	 * Returns request parameters.
@@ -68,5 +88,10 @@ public interface Request {
 	 * Returns the absolute URL corresponding to the the HTTP request.
 	 */
 	public String url();
+
+	/**
+	 * Sets url value.
+	 */
+	public T url(String path);
 
 }

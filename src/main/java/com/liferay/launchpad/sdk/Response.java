@@ -17,7 +17,7 @@ import java.util.Map;
 /**
  * HTTP response.
  */
-public interface Response {
+public interface Response<T extends Response> {
 
 	/**
 	 * Returns body content.
@@ -90,8 +90,18 @@ public interface Response {
 	public int statusCode();
 
 	/**
+	 * Sets the status code.
+	 */
+	public T statusCode(int statusCode);
+
+	/**
 	 * Returns status message.
 	 */
 	public String statusMessage();
+
+	/**
+	 * Sets the status message.
+	 */
+	public T statusMessage(String statusMessage);
 
 }
