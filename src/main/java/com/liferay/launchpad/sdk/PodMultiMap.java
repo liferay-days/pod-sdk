@@ -17,18 +17,16 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Multi-map for headers.
+ * Multi-map.
  */
 public interface PodMultiMap extends Iterable<Map.Entry<String, String>> {
 
 	/**
-	 * Adds a new values under the specified name.
-	 *
-	 * @param name The name being set
-	 * @param values The values
-	 * @return a reference to this, so the API can be used fluently
+	 * Creates new default implementation of the multi-map.
 	 */
-	public PodMultiMap add(String name, Iterable<String> values);
+	public static PodMultiMap newMultiMap() {
+		return new PodMultiMapImpl();
+	}
 
 	/**
 	 * Adds a new value with the specified name and value.
@@ -38,6 +36,23 @@ public interface PodMultiMap extends Iterable<Map.Entry<String, String>> {
 	 * @return a reference to this, so the API can be used fluently
 	 */
 	public PodMultiMap add(String name, String value);
+
+	/**
+	 * Adds all values from the map.
+	 *
+	 * @param map source map
+	 * @return a reference to this, so the API can be used fluently
+	 */
+	public PodMultiMap addAll(Map<String, String> map);
+
+	/**
+	 * Adds new values under the specified name.
+	 *
+	 * @param name The name being set
+	 * @param values The values
+	 * @return a reference to this, so the API can be used fluently
+	 */
+	public PodMultiMap addAll(String name, Iterable<String> values);
 
 	/**
 	 * Removes all
@@ -65,8 +80,7 @@ public interface PodMultiMap extends Iterable<Map.Entry<String, String>> {
 	/**
 	 * Returns the value of with the specified name.  If there are
 	 * more than one values for the specified name, the first value is returned.
-	 * Returns {@code null} if header value does not exist.
-	 *
+	 * Returns {@code null} if value does not exist.
 	 */
 	public String get(String name);
 
@@ -100,24 +114,32 @@ public interface PodMultiMap extends Iterable<Map.Entry<String, String>> {
 	public PodMultiMap remove(String name);
 
 	/**
-	 * Sets values for the specified name.
-	 *
-	 * @param name The name of the headers being set
-	 * @param values The values of the headers being set
-	 * @return a reference to this, so the API can be used fluently
-	 */
-	public PodMultiMap set(String name, Iterable<String> values);
-
-	/**
 	 * Sets a value under the specified name.
 	 * <p>
-	 * If there is an existing header with the same name, it is removed.
+	 * If there is an existing key with the same name, it is removed.
 	 *
 	 * @param name The name
 	 * @param value The value
 	 * @return a reference to this, so the API can be used fluently
 	 */
 	public PodMultiMap set(String name, String value);
+
+	/**
+	 * Sets values from given map.
+	 *
+	 * @param map The source map
+	 * @return a reference to this, so the API can be used fluently
+	 */
+	public PodMultiMap setAll(Map<String, String> map);
+
+	/**
+	 * Sets values for the specified name.
+	 *
+	 * @param name The name being set
+	 * @param values The values being set
+	 * @return a reference to this, so the API can be used fluently
+	 */
+	public PodMultiMap setAll(String name, Iterable<String> values);
 
 	/**
 	 * Return the number of keys.

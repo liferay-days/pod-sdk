@@ -97,13 +97,8 @@ public interface PodLogger {
 	 * Logger level.
 	 */
 	public enum Level {
+
 		TRACE(1), DEBUG(2), INFO(3), WARN(4), ERROR(5);
-
-		private final int value;
-
-		Level(int value) {
-			this.value = value;
-		}
 
 		/**
 		 * Returns <code>true</code> if this level
@@ -112,6 +107,13 @@ public interface PodLogger {
 		public boolean isEnabledFor(Level level) {
 			return this.value >= level.value;
 		}
+
+		private Level(int value) {
+			this.value = value;
+		}
+
+		private final int value;
+
 	}
 
 }

@@ -20,15 +20,15 @@ public enum ContentType {
 	TEXT("text/plain; charset=UTF-8"), HTML("text/html; charset=UTF-8"),
 	JSON("application/json; charset=UTF-8");
 
-	ContentType(String contentType) {
-		this.contentType = contentType;
-	}
-
 	/**
 	 * Returns content-type string.
 	 */
 	public String contentType() {
 		return contentType;
+	}
+
+	private ContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 	private final String contentType;
