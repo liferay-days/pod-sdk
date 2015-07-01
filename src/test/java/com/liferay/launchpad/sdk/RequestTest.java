@@ -11,29 +11,25 @@
  */
 package com.liferay.launchpad.sdk;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 /**
  */
 public class RequestTest {
 
-	RequestImpl request;
-
-	@Before
-	public void setUp() {
-		request = new RequestImpl();
-	}
-
 	@Test
 	public void testBody() {
+		Request request = new RequestImpl("http://127.0.0.1");
 		request.body("foo");
-		Assert.assertEquals("foo", request.body());
+		assertEquals("foo", request.body());
 	}
 
 	@Test
 	public void testFileUploads() {
+		RequestImpl request = new RequestImpl("http://127.0.0.1");
 		FileUpload[] fileUploads = new FileUpload[] {};
 		request.fileUploads(fileUploads);
 		Assert.assertArrayEquals(fileUploads, request.fileUploads());
@@ -41,68 +37,77 @@ public class RequestTest {
 
 	@Test
 	public void testHeaders() {
+		Request request = new RequestImpl("http://127.0.0.1");
 		request.header("header", "1");
-		Assert.assertEquals("1", request.headers().get("header"));
+		assertEquals("1", request.headers().get("header"));
 	}
 
 	@Test
 	public void testHeaders_setFromMap() {
+		Request request = new RequestImpl("http://127.0.0.1");
 		PodMultiMap map = new PodMultiMapImpl();
 		request.headers(map);
-		Assert.assertEquals(map, request.headers());
+		assertEquals(map, request.headers());
 	}
 
 	@Test
 	public void testMethod() {
+		Request request = new RequestImpl("http://127.0.0.1");
 		request.method("post");
-		Assert.assertEquals("post", request.method());
+		assertEquals("post", request.method());
 	}
 
 	@Test
 	public void testParams() {
-		request.url("http://localhost:8080/path/sub?param1=1");
+		Request request = new RequestImpl(
+			"http://localhost:8080/path/sub?param1=1");
 		request.param("param2", "2");
-		Assert.assertEquals(null, request.params().get("param1"));
-		Assert.assertEquals("2", request.params().get("param2"));
+		assertEquals(null, request.params().get("param1"));
+		assertEquals("2", request.params().get("param2"));
 	}
 
 	@Test
 	public void testParams_setFromMap() {
+		Request request = new RequestImpl("http://127.0.0.1");
 		PodMultiMap map = new PodMultiMapImpl();
 		request.params(map);
-		Assert.assertEquals(map, request.params());
+		assertEquals(map, request.params());
 	}
 
 	@Test
 	public void testResponse() {
+		RequestImpl request = new RequestImpl("http://127.0.0.1");
 		Response response = new ResponseImpl(request);
 		request.response(response);
-		Assert.assertEquals(response, request.response());
+		assertEquals(response, request.response());
 	}
 
 	@Test
 	public void testUrl() {
-		request.url("http://localhost:8080/path/sub?query=1");
-		Assert.assertEquals(
-			"http://localhost:8080/path/sub?query=1", request.url());
+		Request request = new RequestImpl(
+			"http://localhost:8080/path/sub?query=1");
+		assertEquals("http://localhost:8080/path/sub?query=1", request.url());
 	}
 
 	@Test
 	public void testUrlBaseUrl() {
-		request.url("http://localhost:8080/path/sub?query=1");
-		Assert.assertEquals("http://localhost:8080", request.baseUrl());
+		Request request = new RequestImpl(
+			"http://localhost:8080/path/sub?query=1");
+		assertEquals("http://localhost:8080", request.baseUrl());
 	}
 
 	@Test
 	public void testUrlPath() {
-		request.url("http://localhost:8080/path/sub?query=1");
-		Assert.assertEquals("/path/sub", request.path());
+		Request request = new RequestImpl(
+			"http://localhost:8080/path/sub?query=1");
+		assertEquals("/path/sub", request.path());
 	}
 
 	@Test
 	public void testUrlQuery() {
-		request.url("http://localhost:8080/path/sub?query=1&other=2");
-		Assert.assertEquals("query=1&other=2", request.query());
+		Request request = new RequestImpl(
+			"http://localhost:8080/path/sub?query=1&other=2");
+		assertEquals("query=1&other=2", request.query());
 	}
 
 }

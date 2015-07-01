@@ -15,16 +15,18 @@ package com.liferay.launchpad.sdk;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
+ * {@link Request} implementation.
  */
 public class RequestImpl implements Request {
 
+	public RequestImpl(String url) {
+		this.url(url);
+	}
+
 	@Override
 	public String baseUrl() {
-		return urlParsed.getProtocol() + "://" + urlParsed.getHost() +
-			":" + urlParsed.getPort();
+		return baseUrl;
 	}
 
 	@Override
@@ -40,7 +42,7 @@ public class RequestImpl implements Request {
 
 	@Override
 	public PodContext context() {
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -51,7 +53,7 @@ public class RequestImpl implements Request {
 	/**
 	 * Sets the file uploads.
 	 */
-	Request fileUploads(FileUpload[] fileUploads) {
+	Request fileUploads(FileUpload... fileUploads) {
 		this.fileUploads = fileUploads;
 		return this;
 	}
@@ -103,12 +105,12 @@ public class RequestImpl implements Request {
 
 	@Override
 	public String path() {
-		return urlParsed.getPath();
+		return path;
 	}
 
 	@Override
 	public String query() {
-		return urlParsed.getQuery();
+		return query;
 	}
 
 	@Override
@@ -138,22 +140,32 @@ public class RequestImpl implements Request {
 		this.url = url;
 
 		try {
-			this.urlParsed = new URL(url);
+			URL urlParsed = new URL(url);
+
+			baseUrl =
+				urlParsed.getProtocol() + "://" + urlParsed.getHost() + ":" +
+					urlParsed.getPort();
+
+			path = urlParsed.getPath();
+
+			query = urlParsed.getQuery();
 		}
 		catch (MalformedURLException e) {
-			e.printStackTrace();
+			throw new PodException("Invalid URL: " + url, e);
 		}
 
 		return this;
 	}
 
+	protected String baseUrl;
 	protected String body;
 	protected FileUpload[] fileUploads;
 	protected PodMultiMap headers = new PodMultiMapImpl();
 	protected String method;
 	protected PodMultiMap params = new PodMultiMapImpl();
+	protected String path;
+	protected String query;
 	protected Response response;
 	protected String url;
-	protected URL urlParsed = null;
 
 }

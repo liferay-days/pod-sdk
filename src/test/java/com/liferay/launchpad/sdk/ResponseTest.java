@@ -11,71 +11,80 @@
  */
 package com.liferay.launchpad.sdk;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import org.junit.Test;
 
 /**
  */
 public class ResponseTest {
 
-	RequestImpl request;
-	ResponseImpl response;
-
-	@Before
-	public void setUp() {
-		request = new RequestImpl();
-		response = new ResponseImpl(request);
-	}
-
 	@Test
 	public void testBody() {
+		Request request = new RequestImpl("Http://localhost:8080");
+		Response response = new ResponseImpl(request);
 		response.body("foo");
-		Assert.assertEquals("foo", response.body());
+		assertEquals("foo", response.body());
 	}
 
 	@Test
 	public void testHeaders() {
+		Request request = new RequestImpl("Http://localhost:8080");
+		Response response = new ResponseImpl(request);
 		response.header("header", "1");
-		Assert.assertEquals("1", response.headers().get("header"));
+		assertEquals("1", response.headers().get("header"));
 	}
 
 	@Test
 	public void testHeaders_setFromMap() {
+		Request request = new RequestImpl("Http://localhost:8080");
+		Response response = new ResponseImpl(request);
 		PodMultiMap map = new PodMultiMapImpl();
 		response.headers(map);
-		Assert.assertEquals(map, response.headers());
+		assertEquals(map, response.headers());
 	}
 
 	@Test
 	public void testIsCommitted() {
-		Assert.assertEquals(false, response.isCommitted());
+		Request request = new RequestImpl("Http://localhost:8080");
+		Response response = new ResponseImpl(request);
+
+		assertFalse(response.isCommitted());
 		response.body("foo");
-		Assert.assertEquals(true, response.isCommitted());
+		assertTrue(response.isCommitted());
 	}
 
-	@Test(expected = NotImplementedException.class)
+	@Test(expected = UnsupportedOperationException.class)
 	public void testPodContext_throwsNotImplemented() {
+		Request request = new RequestImpl("Http://localhost:8080");
+		Response response = new ResponseImpl(request);
+
 		response.context();
 	}
 
 	@Test
 	public void testRequest() {
-		Assert.assertEquals(request, response.request());
+		Request request = new RequestImpl("Http://localhost:8080");
+		Response response = new ResponseImpl(request);
+		assertEquals(request, response.request());
 	}
 
 	@Test
 	public void testStatusCode() {
+		Request request = new RequestImpl("Http://localhost:8080");
+		Response response = new ResponseImpl(request);
 		response.statusCode(200);
-		Assert.assertEquals(200, response.statusCode());
+		assertEquals(200, response.statusCode());
 	}
 
 	@Test
 	public void testStatusMessage() {
+		Request request = new RequestImpl("Http://localhost:8080");
+		Response response = new ResponseImpl(request);
 		response.statusMessage("OK");
-		Assert.assertEquals("OK", response.statusMessage());
+		assertEquals("OK", response.statusMessage());
 	}
 
 }
