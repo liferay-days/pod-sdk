@@ -33,8 +33,23 @@ public interface Response {
 	 * Just a shortcut call.
 	 */
 	public default void body(String body, ContentType contentType) {
-		header(contentType);
+		contentType(contentType);
 		body(body);
+	}
+
+	/**
+	 * Gets the content type header.
+	 */
+	public default String contentType() {
+		return headers().get("Content-Type");
+	}
+
+	/**
+	 * Sets the content type header.
+	 */
+	public default Response contentType(ContentType contentType) {
+		header("Content-Type", contentType.contentType());
+		return this;
 	}
 
 	/**
@@ -47,14 +62,6 @@ public interface Response {
 	 */
 	public default void end() {
 		body(null);
-	}
-
-	/**
-	 * Sets the content type header.
-	 */
-	public default Response header(ContentType contentType) {
-		header("Content-Type", contentType.contentType());
-		return this;
 	}
 
 	/**

@@ -33,6 +33,21 @@ public interface Request {
 	public Request body(String body);
 
 	/**
+	 * Gets the content type header.
+	 */
+	public default String contentType() {
+		return headers().get("Content-Type");
+	}
+
+	/**
+	 * Sets the content type header.
+	 */
+	public default Request contentType(ContentType contentType) {
+		header("Content-Type", contentType.contentType());
+		return this;
+	}
+
+	/**
 	 * Returns the context that this request belongs to.
 	 */
 	public PodContext context();
