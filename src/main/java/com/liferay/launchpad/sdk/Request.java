@@ -80,11 +80,6 @@ public interface Request<T extends Request> {
 	public String path();
 
 	/**
-	 * Returns associated response of this request.
-	 */
-	public Response response();
-
-	/**
 	 * Returns the absolute URL corresponding to the the HTTP request.
 	 */
 	public String url();

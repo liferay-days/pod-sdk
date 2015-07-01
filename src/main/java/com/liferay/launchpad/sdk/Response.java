@@ -12,8 +12,6 @@
 
 package com.liferay.launchpad.sdk;
 
-import java.util.Map;
-
 /**
  * HTTP response.
  */
@@ -62,22 +60,27 @@ public interface Response<T extends Response> {
 	/**
 	 * Returns the first header value with the specified name
 	 */
-	public String header(String headerName);
+	public String header(String name);
 
 	/**
 	 * Sets the first header name with the specified value
 	 */
-	public Response header(String headerName, String headerValue);
+	public Response header(String name, String value);
 
 	/**
 	 * Returns headers.
 	 */
-	public Map<String, String> headers();
+	public PodMultiMap headers();
 
 	/**
 	 * Returns <code>true</code> if response is already committed.
 	 */
 	public boolean isCommitted();
+
+	/**
+	 * Returns associated request of this response.
+	 */
+	public Request request();
 
 	/**
 	 * Sets the response status code and message.
