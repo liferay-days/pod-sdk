@@ -15,7 +15,7 @@ package com.liferay.launchpad.sdk;
 /**
  * HTTP response.
  */
-public interface Response<T extends Response> {
+public interface Response {
 
 	/**
 	 * Returns body content.
@@ -58,11 +58,6 @@ public interface Response<T extends Response> {
 	}
 
 	/**
-	 * Returns the first header value with the specified name
-	 */
-	public String header(String name);
-
-	/**
 	 * Sets the first header name with the specified value
 	 */
 	public Response header(String name, String value);
@@ -71,6 +66,11 @@ public interface Response<T extends Response> {
 	 * Returns headers.
 	 */
 	public PodMultiMap headers();
+
+	/**
+	 * Sets request headers.
+	 */
+	public Response headers(PodMultiMap headers);
 
 	/**
 	 * Returns <code>true</code> if response is already committed.
@@ -85,7 +85,11 @@ public interface Response<T extends Response> {
 	/**
 	 * Sets the response status code and message.
 	 */
-	public Response status(int statusCode, String statusMessage);
+	public default Response status(int statusCode, String statusMessage) {
+		statusCode(statusCode);
+		statusMessage(statusMessage);
+		return this;
+	}
 
 	/**
 	 * Returns status code.
@@ -95,7 +99,7 @@ public interface Response<T extends Response> {
 	/**
 	 * Sets the status code.
 	 */
-	public T statusCode(int statusCode);
+	public Response statusCode(int statusCode);
 
 	/**
 	 * Returns status message.
@@ -105,6 +109,6 @@ public interface Response<T extends Response> {
 	/**
 	 * Sets the status message.
 	 */
-	public T statusMessage(String statusMessage);
+	public Response statusMessage(String statusMessage);
 
 }

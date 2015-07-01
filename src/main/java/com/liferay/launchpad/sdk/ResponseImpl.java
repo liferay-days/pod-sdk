@@ -38,13 +38,6 @@ public class ResponseImpl implements Response {
 	}
 
 	@Override
-	public String header(String headerName) {
-		return null;
-	}
-
-	/**
-	 * @see Response#header(String, String)
-	 */
 	public Response header(String name, String value) {
 		headers.set(name, value);
 		return this;
@@ -56,20 +49,19 @@ public class ResponseImpl implements Response {
 	}
 
 	@Override
+	public Response headers(PodMultiMap headers) {
+		this.headers = headers;
+		return this;
+	}
+
+	@Override
 	public boolean isCommitted() {
-		return false;
+		return (body != null);
 	}
 
 	@Override
 	public Request request() {
 		return request;
-	}
-
-	@Override
-	public Response status(int statusCode, String statusMessage) {
-		statusCode(statusCode);
-		statusMessage(statusMessage);
-		return this;
 	}
 
 	@Override
@@ -94,7 +86,7 @@ public class ResponseImpl implements Response {
 		return this;
 	}
 
-	protected String body;
+	protected String body = null;
 	protected PodMultiMap headers = new PodMultiMapImpl();
 	protected Request request;
 	protected int statusCode;

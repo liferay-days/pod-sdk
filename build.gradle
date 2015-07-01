@@ -27,7 +27,13 @@ apply from: "${gradleScriptDir}/bintray.gradle"
 apply plugin: 'com.liferay.source.formatter'
 
 repositories {
+    mavenLocal()
+    mavenCentral()
     jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8

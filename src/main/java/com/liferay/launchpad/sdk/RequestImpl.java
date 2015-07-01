@@ -21,116 +21,135 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  */
 public class RequestImpl implements Request {
 
-	/**
-	 * @see Request#baseUrl()
-	 */
+	@Override
 	public String baseUrl() {
-		return url().substring(0, url().indexOf(path()));
+		return urlParsed.getProtocol() + "://" + urlParsed.getHost() +
+			":" + urlParsed.getPort();
 	}
 
-	/**
-	 * @see Request#body()
-	 */
+	@Override
 	public String body() {
 		return body;
 	}
 
-	/**
-	 * @see Request#body(String)
-	 */
+	@Override
 	public Request body(String body) {
 		this.body = body;
 		return this;
 	}
 
-	/**
-	 * @see Request#context()
-	 */
+	@Override
 	public PodContext context() {
 		throw new NotImplementedException();
 	}
 
-	/**
-	 * @see Request#fileUploads()
-	 */
+	@Override
 	public FileUpload[] fileUploads() {
-		throw new NotImplementedException();
+		return fileUploads;
 	}
 
 	/**
-	 * @see Request#header(String, String)
+	 * Sets the file uploads.
 	 */
+	Request fileUploads(FileUpload[] fileUploads) {
+		this.fileUploads = fileUploads;
+		return this;
+	}
+
+	@Override
 	public Request header(String name, String value) {
 		headers.set(name, value);
 		return this;
 	}
 
-	/**
-	 * @see Request#headers()
-	 */
+	@Override
 	public PodMultiMap headers() {
 		return headers;
 	}
 
-	/**
-	 * @see Request#method()
-	 */
+	@Override
+	public Request headers(PodMultiMap headers) {
+		this.headers = headers;
+		return this;
+	}
+
+	@Override
 	public String method() {
 		return method;
 	}
 
-	/**
-	 * @see Request#method(String)
-	 */
+	@Override
 	public Request method(String method) {
 		this.method = method;
 		return this;
 	}
 
-	/**
-	 * @see Request#param(String, String)
-	 */
+	@Override
 	public Request param(String name, String value) {
 		params.set(name, value);
 		return this;
 	}
 
-	/**
-	 * @see Request#params()
-	 */
+	@Override
 	public PodMultiMap params() {
 		return params;
 	}
 
 	@Override
+	public Request params(PodMultiMap params) {
+		this.params = params;
+		return this;
+	}
+
+	@Override
 	public String path() {
-		try {
-			return new URL(url()).getPath();
-		}
-		catch (MalformedURLException e) {
-			return "";
-		}
+		return urlParsed.getPath();
+	}
+
+	@Override
+	public String query() {
+		return urlParsed.getQuery();
+	}
+
+	@Override
+	public Response response() {
+		return response;
 	}
 
 	/**
-	 * @see Request#url()
+	 * Sets the response.
 	 */
+	Request response(Response response) {
+		this.response = response;
+		return this;
+	}
+
+	@Override
 	public String url() {
 		return url;
 	}
 
-	/**
-	 * @see Request#url(String)
-	 */
+	@Override
 	public Request url(String path) {
 		this.url = path;
+
+		try {
+			this.urlParsed = new URL(url());
+		}
+		catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+
 		return this;
 	}
 
 	protected String body;
+	protected FileUpload[] fileUploads;
 	protected PodMultiMap headers = new PodMultiMapImpl();
 	protected String method;
 	protected PodMultiMap params = new PodMultiMapImpl();
+	protected Response response;
 	protected String url;
+	protected URL urlParsed = null;
 
 }
