@@ -107,6 +107,6 @@ public interface Request {
 	/**
 	 * Sets url value.
 	 */
-	public Request url(String path);
+	public Request url(String url);
 
 }

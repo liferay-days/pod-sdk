@@ -130,11 +130,15 @@ public class RequestImpl implements Request {
 	}
 
 	@Override
-	public Request url(String path) {
-		this.url = path;
+	public Request url(String url) {
+		if (url.startsWith("/")) {
+			url = "http://localhost" + url;
+		}
+
+		this.url = url;
 
 		try {
-			this.urlParsed = new URL(url());
+			this.urlParsed = new URL(url);
 		}
 		catch (MalformedURLException e) {
 			e.printStackTrace();
