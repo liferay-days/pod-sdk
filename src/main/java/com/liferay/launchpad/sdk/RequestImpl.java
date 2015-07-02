@@ -131,8 +131,7 @@ public class RequestImpl implements Request {
 		return url;
 	}
 
-	@Override
-	public Request url(String url) {
+	private void url(String url) {
 		if (url.startsWith("/")) {
 			url = "http://localhost" + url;
 		}
@@ -153,8 +152,6 @@ public class RequestImpl implements Request {
 		catch (MalformedURLException e) {
 			throw new PodException("Invalid URL: " + url, e);
 		}
-
-		return this;
 	}
 
 	protected String baseUrl;

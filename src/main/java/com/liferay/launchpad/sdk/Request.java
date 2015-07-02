@@ -119,9 +119,4 @@ public interface Request {
 	 */
 	public String url();
 
-	/**
-	 * Sets url value.
-	 */
-	public Request url(String url);
-
 }
