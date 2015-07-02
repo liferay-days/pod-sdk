@@ -12,8 +12,6 @@
 
 package com.liferay.launchpad.sdk;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 /**
  */
 public class ResponseImpl implements Response {
@@ -34,7 +32,7 @@ public class ResponseImpl implements Response {
 
 	@Override
 	public PodContext context() {
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
