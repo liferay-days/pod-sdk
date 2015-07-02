@@ -133,7 +133,7 @@ public class RequestImpl implements Request {
 
 	private void url(String url) {
 		if (url.startsWith("/")) {
-			url = "http://localhost" + url;
+			url = "http://localhost:8080" + url;
 		}
 
 		this.url = url;
