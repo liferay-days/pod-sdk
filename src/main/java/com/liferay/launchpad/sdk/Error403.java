@@ -46,6 +46,13 @@ class Error403 {
 		this.errorResponse = errorResponse;
 	}
 
+	/**
+	 * Shortcut for {@link #forbidden()}.
+	 */
+	public void end(Response response) {
+		forbidden().end(response);
+	}
+
 	public Error.ErrorResponse forbidden() {
 		return error(0);
 	}

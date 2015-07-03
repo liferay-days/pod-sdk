@@ -27,6 +27,13 @@ class Error500 {
 		this.errorResponse = errorResponse;
 	}
 
+	/**
+	 * Shortcut for {@link #internalError()}.
+	 */
+	public void end(Response response) {
+		internalError().end(response);
+	}
+
 	public Error.ErrorResponse internalError() {
 		return error(0);
 	}

@@ -33,6 +33,13 @@ class Error404 {
 		this.errorResponse = errorResponse;
 	}
 
+	/**
+	 * Shortcut for {@link #notFound()}.
+	 */
+	public void end(Response response) {
+		notFound().end(response);
+	}
+
 	public Error.ErrorResponse notFound() {
 		return error(0);
 	}

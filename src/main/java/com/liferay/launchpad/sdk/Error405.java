@@ -28,6 +28,13 @@ class Error405 {
 		this.errorResponse = errorResponse;
 	}
 
+	/**
+	 * Shortcut for {@link #httpMethodNotAllowed()}.
+	 */
+	public void end(Response response) {
+		httpMethodNotAllowed().end(response);
+	}
+
 	public Error.ErrorResponse httpMethodNotAllowed() {
 		return error(0);
 	}

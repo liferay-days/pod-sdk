@@ -46,7 +46,8 @@ public class Error {
 	}
 
 	static class ErrorResponse {
-		public ErrorResponse(int statusCode) {
+
+		ErrorResponse(int statusCode) {
 			this.statusCode = statusCode;
 		}
 

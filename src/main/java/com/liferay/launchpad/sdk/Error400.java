@@ -67,6 +67,13 @@ class Error400 {
 		this.errorResponse = errorResponse;
 	}
 
+	/**
+	 * Shortcut for {@link #badRequest()}.
+	 */
+	public void end(Response response) {
+		badRequest().end(response);
+	}
+
 	public Error.ErrorResponse badRequest() {
 		return error(0);
 	}
