@@ -131,6 +131,17 @@ public class RequestImpl implements Request {
 		return url;
 	}
 
+	protected String baseUrl;
+	protected String body;
+	protected FileUpload[] fileUploads;
+	protected PodMultiMap headers = new PodMultiMapImpl();
+	protected String method;
+	protected PodMultiMap params = new PodMultiMapImpl();
+	protected String path;
+	protected String query;
+	protected Response response;
+	protected String url;
+
 	private void url(String url) {
 		if (url.startsWith("/")) {
 			url = "http://localhost:8080" + url;
@@ -153,16 +164,5 @@ public class RequestImpl implements Request {
 			throw new PodException("Invalid URL: " + url, e);
 		}
 	}
-
-	protected String baseUrl;
-	protected String body;
-	protected FileUpload[] fileUploads;
-	protected PodMultiMap headers = new PodMultiMapImpl();
-	protected String method;
-	protected PodMultiMap params = new PodMultiMapImpl();
-	protected String path;
-	protected String query;
-	protected Response response;
-	protected String url;
 
 }
