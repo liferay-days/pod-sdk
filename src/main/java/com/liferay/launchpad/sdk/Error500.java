@@ -34,7 +34,7 @@ public class Error500 {
 	 * Shortcut for {@link #internalError()}.
 	 */
 	public void end(Response response) {
-		internalError().end(response);
+		errorResponse.end(response);
 	}
 
 	public Error500 internalError() {

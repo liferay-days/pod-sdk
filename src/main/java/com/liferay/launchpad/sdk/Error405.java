@@ -35,7 +35,7 @@ public class Error405 {
 	 * Shortcut for {@link #httpMethodNotAllowed()}.
 	 */
 	public void end(Response response) {
-		httpMethodNotAllowed().end(response);
+		errorResponse.end(response);
 	}
 
 	public Error405 httpMethodNotAllowed() {

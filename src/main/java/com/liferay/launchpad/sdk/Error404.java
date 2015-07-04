@@ -40,7 +40,7 @@ public class Error404 {
 	 * Shortcut for {@link #notFound()}.
 	 */
 	public void end(Response response) {
-		notFound().end(response);
+		errorResponse.end(response);
 	}
 
 	public Error404 notFound() {

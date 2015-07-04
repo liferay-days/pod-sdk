@@ -53,7 +53,7 @@ public class Error403 {
 	 * Shortcut for {@link #forbidden()}.
 	 */
 	public void end(Response response) {
-		forbidden().end(response);
+		errorResponse.end(response);
 	}
 
 	public Error403 forbidden() {
