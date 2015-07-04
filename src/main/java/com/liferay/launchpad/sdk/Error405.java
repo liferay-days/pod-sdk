@@ -24,8 +24,11 @@ public class Error405 {
 		}
 	};
 
-	Error405() {
-		this.errorResponse = new ResponseError.ErrorResponse(405);
+	Error405(String message) {
+		if (message == null) {
+			message = "Method Not Allowed";
+		}
+		this.errorResponse = new ResponseError.ErrorResponse(405, message);
 	}
 
 	/**

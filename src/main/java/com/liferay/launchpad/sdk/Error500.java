@@ -23,8 +23,11 @@ public class Error500 {
 		}
 	};
 
-	Error500() {
-		this.errorResponse = new ResponseError.ErrorResponse(500);
+	Error500(String message) {
+		if (message == null) {
+			message = "Internal Server Error";
+		}
+		this.errorResponse = new ResponseError.ErrorResponse(500, message);
 	}
 
 	/**

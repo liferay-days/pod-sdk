@@ -42,8 +42,11 @@ public class Error403 {
 		}
 	};
 
-	Error403() {
-		this.errorResponse = new ResponseError.ErrorResponse(403);
+	Error403(String message) {
+		if (message == null) {
+			message = "Forbidden";
+		}
+		this.errorResponse = new ResponseError.ErrorResponse(403, message);
 	}
 
 	/**

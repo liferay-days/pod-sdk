@@ -18,8 +18,9 @@ public class Error400Test {
 
 		Map<String, Object> body = deserializeBody(response);
 
-		assertEquals(1, body.size());
+		assertEquals(2, body.size());
 		assertEquals(Integer.valueOf(400), body.get("code"));
+		assertEquals("Bad Request", body.get("message"));
 	}
 
 	@Test
@@ -30,8 +31,9 @@ public class Error400Test {
 
 		Map<String, Object> body = deserializeBody(response);
 
-		assertEquals(2, body.size());
+		assertEquals(3, body.size());
 		assertEquals(Integer.valueOf(400), body.get("code"));
+		assertEquals("Bad Request", body.get("message"));
 
 		List<Map> errors = (List) body.get("errors");
 		assertEquals(1, errors.size());
@@ -46,8 +48,9 @@ public class Error400Test {
 
 		Map<String, Object> body = deserializeBody(response);
 
-		assertEquals(2, body.size());
+		assertEquals(3, body.size());
 		assertEquals(Integer.valueOf(400), body.get("code"));
+		assertEquals("Bad Request", body.get("message"));
 
 		List<Map> errors = (List) body.get("errors");
 		assertEquals(2, errors.size());

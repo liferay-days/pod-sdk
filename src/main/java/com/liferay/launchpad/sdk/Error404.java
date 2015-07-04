@@ -29,8 +29,11 @@ public class Error404 {
 		}
 	};
 
-	Error404() {
-		this.errorResponse = new ResponseError.ErrorResponse(404);
+	Error404(String message) {
+		if (message == null) {
+			message = "Not Found";
+		}
+		this.errorResponse = new ResponseError.ErrorResponse(404, message);
 	}
 
 	/**
