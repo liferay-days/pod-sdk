@@ -24,7 +24,7 @@ class Error500 {
 	};
 
 	Error500() {
-		this.errorResponse = new Error.ErrorResponse(500);
+		this.errorResponse = new ResponseError.ErrorResponse(500);
 	}
 
 	/**
@@ -43,6 +43,6 @@ class Error500 {
 		return this;
 	}
 
-	private final Error.ErrorResponse errorResponse;
+	private final ResponseError.ErrorResponse errorResponse;
 
 }

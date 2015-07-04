@@ -25,7 +25,7 @@ class Error405 {
 	};
 
 	Error405() {
-		this.errorResponse = new Error.ErrorResponse(405);
+		this.errorResponse = new ResponseError.ErrorResponse(405);
 	}
 
 	/**
@@ -44,6 +44,6 @@ class Error405 {
 		return this;
 	}
 
-	private final Error.ErrorResponse errorResponse;
+	private final ResponseError.ErrorResponse errorResponse;
 
 }

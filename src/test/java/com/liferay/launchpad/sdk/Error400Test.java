@@ -14,7 +14,7 @@ public class Error400Test {
 	public void testBadRequest() {
 		Response response = createResponse();
 
-		Error.badRequest().end(response);
+		ResponseError.badRequest().end(response);
 
 		Map<String, Object> body = deserializeBody(response);
 
@@ -26,7 +26,7 @@ public class Error400Test {
 	public void testBadRequest_badContent() {
 		Response response = createResponse();
 
-		Error.badRequest().badContent().end(response);
+		ResponseError.badRequest().badContent().end(response);
 
 		Map<String, Object> body = deserializeBody(response);
 
@@ -42,7 +42,7 @@ public class Error400Test {
 	public void testBadRequest_badContent_keyExpired() {
 		Response response = createResponse();
 
-		Error.badRequest().badContent().keyExpired().end(response);
+		ResponseError.badRequest().badContent().keyExpired().end(response);
 
 		Map<String, Object> body = deserializeBody(response);
 

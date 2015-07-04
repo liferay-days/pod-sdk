@@ -30,7 +30,7 @@ class Error404 {
 	};
 
 	Error404() {
-		this.errorResponse = new Error.ErrorResponse(404);
+		this.errorResponse = new ResponseError.ErrorResponse(404);
 	}
 
 	/**
@@ -53,5 +53,5 @@ class Error404 {
 		return this;
 	}
 
-	private final Error.ErrorResponse errorResponse;
+	private final ResponseError.ErrorResponse errorResponse;
 }

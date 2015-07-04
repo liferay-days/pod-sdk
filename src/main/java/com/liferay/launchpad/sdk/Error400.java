@@ -64,7 +64,7 @@ class Error400 {
 	};
 
 	public Error400() {
-		this.errorResponse = new Error.ErrorResponse(400);
+		this.errorResponse = new ResponseError.ErrorResponse(400);
 	}
 
 	public void end(Response response) {
@@ -112,5 +112,5 @@ class Error400 {
 		return this;
 	}
 
-	private final Error.ErrorResponse errorResponse;
+	private final ResponseError.ErrorResponse errorResponse;
 }

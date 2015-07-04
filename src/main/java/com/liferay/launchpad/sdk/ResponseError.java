@@ -15,9 +15,9 @@ package com.liferay.launchpad.sdk;
 import java.util.LinkedList;
 
 /**
- * Main class for building errors.
+ * Main class for building response errors.
  */
-public class Error {
+public class ResponseError {
 
 	/**
 	 * Creates error 400 response.
@@ -47,6 +47,9 @@ public class Error {
 		return new Error405();
 	}
 
+	/**
+	 * Creates error 500 response.
+	 */
 	public static Error500 internallError() {
 		return new Error500();
 	}

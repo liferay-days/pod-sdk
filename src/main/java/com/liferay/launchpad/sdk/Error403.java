@@ -43,7 +43,7 @@ class Error403 {
 	};
 
 	Error403() {
-		this.errorResponse = new Error.ErrorResponse(403);
+		this.errorResponse = new ResponseError.ErrorResponse(403);
 	}
 
 	/**
@@ -82,5 +82,5 @@ class Error403 {
 		return this;
 	}
 
-	private final Error.ErrorResponse errorResponse;
+	private final ResponseError.ErrorResponse errorResponse;
 }
