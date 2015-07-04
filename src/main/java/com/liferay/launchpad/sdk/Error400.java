@@ -15,7 +15,7 @@ package com.liferay.launchpad.sdk;
 /**
  * Error 400 errors.
  */
-class Error400 {
+public class Error400 {
 
 	public static final String[][] VALS = {
 		{	//0
@@ -63,7 +63,7 @@ class Error400 {
 		}
 	};
 
-	public Error400() {
+	Error400() {
 		this.errorResponse = new ResponseError.ErrorResponse(400);
 	}
 

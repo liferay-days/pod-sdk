@@ -15,7 +15,7 @@ package com.liferay.launchpad.sdk;
 /**
  * Error 500 errors
  */
-class Error500 {
+public class Error500 {
 
 	public static final String[][] VALS = {
 		{	//0

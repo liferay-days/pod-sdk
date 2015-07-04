@@ -15,7 +15,7 @@ package com.liferay.launchpad.sdk;
 /**
  * Error 405 errors
  */
-class Error405 {
+public class Error405 {
 
 	public static final String[][] VALS = {
 		{	//0

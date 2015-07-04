@@ -12,7 +12,7 @@
 
 package com.liferay.launchpad.sdk;
 
-class Error403 {
+public class Error403 {
 
 	public static final String[][] VALS = {
 		{	//0
