@@ -42,6 +42,11 @@ public class Error405 {
 		return error(0);
 	}
 
+	public Error405 error(String reason, String message) {
+		errorResponse.add(reason, message);
+		return this;
+	}
+
 	private Error405 error(int index) {
 		errorResponse.add(VALS[index]);
 		return this;

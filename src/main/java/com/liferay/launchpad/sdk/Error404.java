@@ -51,6 +51,11 @@ public class Error404 {
 		return error(1);
 	}
 
+	public Error404 error(String reason, String message) {
+		errorResponse.add(reason, message);
+		return this;
+	}
+
 	private Error404 error(int index) {
 		errorResponse.add(VALS[index]);
 		return this;

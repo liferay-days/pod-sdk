@@ -41,6 +41,11 @@ public class Error500 {
 		return error(0);
 	}
 
+	public Error500 error(String reason, String message) {
+		errorResponse.add(reason, message);
+		return this;
+	}
+
 	private Error500 error(int index) {
 		errorResponse.add(VALS[index]);
 		return this;

@@ -80,6 +80,11 @@ public class Error403 {
 		return error(5);
 	}
 
+	public Error403 error(String reason, String message) {
+		errorResponse.add(reason, message);
+		return this;
+	}
+
 	private Error403 error(int index) {
 		errorResponse.add(VALS[index]);
 		return this;
