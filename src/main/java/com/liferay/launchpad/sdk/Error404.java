@@ -40,7 +40,7 @@ public class Error404 {
 	 * Shortcut for {@link #notFound()}.
 	 */
 	public void end(Response response) {
-		notFound().end(response);
+		errorResponse.end(response);
 	}
 
 	public Error404 notFound() {
@@ -49,6 +49,11 @@ public class Error404 {
 
 	public Error404 unsupportedProtocol() {
 		return error(1);
+	}
+
+	public Error404 error(String reason, String message) {
+		errorResponse.add(reason, message);
+		return this;
 	}
 
 	private Error404 error(int index) {

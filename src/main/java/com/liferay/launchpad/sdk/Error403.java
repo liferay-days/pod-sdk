@@ -53,7 +53,7 @@ public class Error403 {
 	 * Shortcut for {@link #forbidden()}.
 	 */
 	public void end(Response response) {
-		forbidden().end(response);
+		errorResponse.end(response);
 	}
 
 	public Error403 forbidden() {
@@ -78,6 +78,11 @@ public class Error403 {
 
 	public Error403 unknownAuth() {
 		return error(5);
+	}
+
+	public Error403 error(String reason, String message) {
+		errorResponse.add(reason, message);
+		return this;
 	}
 
 	private Error403 error(int index) {

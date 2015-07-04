@@ -34,11 +34,16 @@ public class Error500 {
 	 * Shortcut for {@link #internalError()}.
 	 */
 	public void end(Response response) {
-		internalError().end(response);
+		errorResponse.end(response);
 	}
 
 	public Error500 internalError() {
 		return error(0);
+	}
+
+	public Error500 error(String reason, String message) {
+		errorResponse.add(reason, message);
+		return this;
 	}
 
 	private Error500 error(int index) {

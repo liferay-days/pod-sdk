@@ -110,6 +110,11 @@ public class Error400 {
 		return error(8);
 	}
 
+	public Error400 error(String reason, String message) {
+		errorResponse.add(reason, message);
+		return this;
+	}
+
 	private Error400 error(int index) {
 		errorResponse.add(VALS[index]);
 		return this;

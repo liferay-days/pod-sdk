@@ -78,14 +78,14 @@ public class ResponseError {
 	/**
 	 * Creates error 500 response.
 	 */
-	public static Error500 internallError(String message) {
+	public static Error500 internalError(String message) {
 		return new Error500(message);
 	}
 
 	/**
 	 * Creates error 500 response.
 	 */
-	public static Error500 internallError() {
+	public static Error500 internalError() {
 		return new Error500(null);
 	}
 
