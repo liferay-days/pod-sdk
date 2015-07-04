@@ -12,6 +12,8 @@
 
 package com.liferay.launchpad.sdk;
 
+import java.util.LinkedList;
+
 /**
  * Main class for building errors.
  */
@@ -21,28 +23,32 @@ public class Error {
 	 * Creates error 400 response.
 	 */
 	public static Error400 badRequest() {
-		return new Error400(new ErrorResponse(400));
+		return new Error400();
 	}
 
 	/**
 	 * Creates error 403 response.
 	 */
 	public static Error403 forbidden() {
-		return new Error403(new ErrorResponse(403));
+		return new Error403();
 	}
 
 	/**
 	 * Creates error 404 response.
 	 */
 	public static Error404 notFound() {
-		return new Error404(new ErrorResponse(404));
+		return new Error404();
 	}
 
 	/**
 	 * Creates error 405 response.
 	 */
 	public static Error405 methodNotAllowed() {
-		return new Error405(new ErrorResponse(405));
+		return new Error405();
+	}
+
+	public static Error500 internallError() {
+		return new Error500();
 	}
 
 	static class ErrorResponse {
@@ -52,8 +58,17 @@ public class Error {
 		}
 
 		private final int statusCode;
-		String reason;
-		String message;
+		private final LinkedList<String[]> subErrors = new LinkedList<>();
+
+		public void add(String reason, String message) {
+			subErrors.add(new String[] {reason, message});
+		}
+		public void add(String... subError) {
+			if (subError.length != 2) {
+				throw new IllegalArgumentException();
+			}
+			subErrors.add(subError);
+		}
 
 		/**
 		 * Ends the error response.
@@ -63,15 +78,31 @@ public class Error {
 
 			StringBuilder errorBody = new StringBuilder();
 
-			errorBody.append("{\n\tcode: ").append(statusCode).append(",\n");
-			errorBody.append("{\n\terror: {\n");
-			errorBody.append("\t\treason: \"");
-			errorBody.append(encodeString(reason));
-			errorBody.append("\",");
-			errorBody.append("\t\tmessage: \"");
-			errorBody.append(encodeString(message));
-			errorBody.append("\"");
-			errorBody.append("\t}\n");
+			errorBody.append("{\n\t\"code\": ");
+			errorBody.append(statusCode);
+
+			if (!subErrors.isEmpty()) {
+				errorBody.append(",\n");
+				errorBody.append("\t\"errors\": [\n");
+
+				for (int i = 0; i < subErrors.size(); i++) {
+					String[] subError = subErrors.get(i);
+
+					if ( i != 0) {
+						errorBody.append("\t\t,\n");
+					}
+					errorBody.append("\t\t{\n");
+					errorBody.append("\t\t\t\"reason\": \"");
+					errorBody.append(encodeString(subError[0]));
+					errorBody.append("\",\n");
+					errorBody.append("\t\t\t\"message\": \"");
+					errorBody.append(encodeString(subError[1]));
+					errorBody.append("\"\n");
+					errorBody.append("\t\t}");
+				}
+
+				errorBody.append("\t]\n");
+			}
 			errorBody.append("}");
 
 			response.body(errorBody.toString());
@@ -80,8 +111,45 @@ public class Error {
 		/**
 		 * Encode input to JSON-safe string.
 		 */
-		private String encodeString(String input) {
-			return input;
+		private String encodeString(String value) {
+			StringBuilder sb = new StringBuilder();
+
+			int len = value.length();
+
+			for (int i = 0; i < len; i++) {
+				char c = value.charAt(i);
+
+				switch (c) {
+					case '"':
+						sb.append("\\\"");
+						break;
+					case '\\':
+						sb.append("\\\\");
+						break;
+					case '/':
+						sb.append("\\/");
+						break;
+					case '\b':
+						sb.append("\\b");
+						break;
+					case '\f':
+						sb.append("\\f");
+						break;
+					case '\n':
+						sb.append("\\n");
+						break;
+					case '\r':
+						sb.append("\\r");
+						break;
+					case '\t':
+						sb.append("\\t");
+						break;
+					default:
+						sb.append(c);
+				}
+			}
+
+			return sb.toString();
 		}
 	}
 

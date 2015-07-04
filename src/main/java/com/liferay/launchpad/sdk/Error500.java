@@ -23,8 +23,8 @@ class Error500 {
 		}
 	};
 
-	Error500(Error.ErrorResponse errorResponse) {
-		this.errorResponse = errorResponse;
+	Error500() {
+		this.errorResponse = new Error.ErrorResponse(500);
 	}
 
 	/**
@@ -34,14 +34,13 @@ class Error500 {
 		internalError().end(response);
 	}
 
-	public Error.ErrorResponse internalError() {
+	public Error500 internalError() {
 		return error(0);
 	}
 
-	private Error.ErrorResponse error(int index) {
-		errorResponse.reason = VALS[index][0];
-		errorResponse.message = VALS[index][1];
-		return errorResponse;
+	private Error500 error(int index) {
+		errorResponse.add(VALS[index]);
+		return this;
 	}
 
 	private final Error.ErrorResponse errorResponse;

@@ -48,68 +48,68 @@ class Error400 {
 			"The API key provided in the request expired, which means the API" +
 				"server is unable to make the request."
 		},
-		{	// 5
+		{	// 6
 			"keyInvalid",
 			"The API key provided in the request is invalid, which means the" +
 				" API server is unable to make the request."
 		},
-		{	// 6
+		{	// 7
 			"parseError", "The API server cannot parse the request body."
 		},
-		{	// 7
+		{	// 8
 			"required",
 			"The API request is missing required information. The required" +
 				" information could be a parameter or resource property."
 		}
 	};
 
-	public Error400(Error.ErrorResponse errorResponse) {
-		this.errorResponse = errorResponse;
+	public Error400() {
+		this.errorResponse = new Error.ErrorResponse(400);
 	}
 
-	/**
-	 * Shortcut for {@link #badRequest()}.
-	 */
 	public void end(Response response) {
-		badRequest().end(response);
+		errorResponse.end(response);
 	}
 
-	public Error.ErrorResponse badRequest() {
+	public Error400 badRequest() {
 		return error(0);
 	}
 
-	public Error.ErrorResponse badContent() {
+	public Error400 badContent() {
 		return error(1);
 	}
 
-	public Error.ErrorResponse corsRequestOrigin() {
+	public Error400 corsRequestOrigin() {
 		return error(2);
 	}
 
-	public Error.ErrorResponse invalidDocumentValue() {
+	public Error400 invalidQuery() {
 		return error(3);
 	}
 
-	public Error.ErrorResponse keyExpired() {
+	public Error400 invalidDocumentValue() {
 		return error(4);
 	}
 
-	public Error.ErrorResponse keyInvalid() {
+	public Error400 keyExpired() {
 		return error(5);
 	}
 
-	public Error.ErrorResponse parseError() {
+	public Error400 keyInvalid() {
 		return error(6);
 	}
 
-	public Error.ErrorResponse required() {
+	public Error400 parseError() {
 		return error(7);
 	}
 
-	private Error.ErrorResponse error(int index) {
-		errorResponse.reason = VALS[index][0];
-		errorResponse.message = VALS[index][1];
-		return errorResponse;
+	public Error400 required() {
+		return error(8);
+	}
+
+	private Error400 error(int index) {
+		errorResponse.add(VALS[index]);
+		return this;
 	}
 
 	private final Error.ErrorResponse errorResponse;

@@ -42,8 +42,8 @@ class Error403 {
 		}
 	};
 
-	Error403(Error.ErrorResponse errorResponse) {
-		this.errorResponse = errorResponse;
+	Error403() {
+		this.errorResponse = new Error.ErrorResponse(403);
 	}
 
 	/**
@@ -53,34 +53,33 @@ class Error403 {
 		forbidden().end(response);
 	}
 
-	public Error.ErrorResponse forbidden() {
+	public Error403 forbidden() {
 		return error(0);
 	}
 
-	public Error.ErrorResponse limitExceeded() {
+	public Error403 limitExceeded() {
 		return error(1);
 	}
 
-	public Error.ErrorResponse quotaExceeded() {
+	public Error403 quotaExceeded() {
 		return error(2);
 	}
 
-	public Error.ErrorResponse rateLimitExceeded() {
+	public Error403 rateLimitExceeded() {
 		return error(3);
 	}
 
-	public Error.ErrorResponse responseTooLarge() {
+	public Error403 responseTooLarge() {
 		return error(4);
 	}
 
-	public Error.ErrorResponse unknownAuth() {
+	public Error403 unknownAuth() {
 		return error(5);
 	}
 
-	private Error.ErrorResponse error(int index) {
-		errorResponse.reason = VALS[index][0];
-		errorResponse.message = VALS[index][1];
-		return errorResponse;
+	private Error403 error(int index) {
+		errorResponse.add(VALS[index]);
+		return this;
 	}
 
 	private final Error.ErrorResponse errorResponse;

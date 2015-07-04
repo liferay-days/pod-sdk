@@ -24,8 +24,8 @@ class Error405 {
 		}
 	};
 
-	Error405(Error.ErrorResponse errorResponse) {
-		this.errorResponse = errorResponse;
+	Error405() {
+		this.errorResponse = new Error.ErrorResponse(405);
 	}
 
 	/**
@@ -35,14 +35,13 @@ class Error405 {
 		httpMethodNotAllowed().end(response);
 	}
 
-	public Error.ErrorResponse httpMethodNotAllowed() {
+	public Error405 httpMethodNotAllowed() {
 		return error(0);
 	}
 
-	private Error.ErrorResponse error(int index) {
-		errorResponse.reason = VALS[index][0];
-		errorResponse.message = VALS[index][1];
-		return errorResponse;
+	private Error405 error(int index) {
+		errorResponse.add(VALS[index]);
+		return this;
 	}
 
 	private final Error.ErrorResponse errorResponse;

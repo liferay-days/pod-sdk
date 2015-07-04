@@ -29,8 +29,8 @@ class Error404 {
 		}
 	};
 
-	Error404(Error.ErrorResponse errorResponse) {
-		this.errorResponse = errorResponse;
+	Error404() {
+		this.errorResponse = new Error.ErrorResponse(404);
 	}
 
 	/**
@@ -40,18 +40,17 @@ class Error404 {
 		notFound().end(response);
 	}
 
-	public Error.ErrorResponse notFound() {
+	public Error404 notFound() {
 		return error(0);
 	}
 
-	public Error.ErrorResponse unsupportedProtocol() {
+	public Error404 unsupportedProtocol() {
 		return error(1);
 	}
 
-	private Error.ErrorResponse error(int index) {
-		errorResponse.reason = VALS[index][0];
-		errorResponse.message = VALS[index][1];
-		return errorResponse;
+	private Error404 error(int index) {
+		errorResponse.add(VALS[index]);
+		return this;
 	}
 
 	private final Error.ErrorResponse errorResponse;
