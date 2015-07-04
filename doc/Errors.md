@@ -9,6 +9,7 @@ The sample JSON response below demonstrates how an error is communicated:
 ```javascript
 {
   "code": 400,
+  "message" : "Default or user-defined description",
   "errors": [
     {
       "reason": "parseError",

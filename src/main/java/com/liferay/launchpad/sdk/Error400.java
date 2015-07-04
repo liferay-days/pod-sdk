@@ -63,8 +63,11 @@ public class Error400 {
 		}
 	};
 
-	Error400() {
-		this.errorResponse = new ResponseError.ErrorResponse(400);
+	Error400(String message) {
+		if (message == null) {
+			message = "Bad Request";
+		}
+		this.errorResponse = new ResponseError.ErrorResponse(400, message);
 	}
 
 	public void end(Response response) {
