@@ -152,7 +152,9 @@ public class ResponseError {
 			}
 			errorBody.append("}");
 
-			response.body(errorBody.toString());
+			response
+				.contentType(ContentType.JSON)
+				.body(errorBody.toString());
 		}
 
 		/**
