@@ -89,7 +89,7 @@ public class Error {
 					String[] subError = subErrors.get(i);
 
 					if ( i != 0) {
-						errorBody.append("\t\t,\n");
+						errorBody.append(",\n");
 					}
 					errorBody.append("\t\t{\n");
 					errorBody.append("\t\t\t\"reason\": \"");
@@ -101,7 +101,10 @@ public class Error {
 					errorBody.append("\t\t}");
 				}
 
-				errorBody.append("\t]\n");
+				errorBody.append("\n\t]\n");
+			}
+			else {
+				errorBody.append("\n");
 			}
 			errorBody.append("}");
 
