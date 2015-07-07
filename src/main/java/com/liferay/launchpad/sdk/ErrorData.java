@@ -13,7 +13,7 @@
 package com.liferay.launchpad.sdk;
 
 import java.util.LinkedList;
-abstract class ErrorData<T> {
+public abstract class ErrorData<T> {
 
 	/**
 	 * Creates body string.
@@ -118,24 +118,22 @@ abstract class ErrorData<T> {
 		return sb.toString();
 	}
 
-	ErrorData() {}
-
 	/**
 	 * Ends the error response.
 	 */
-	abstract void end(T targetCounsumer);
+	protected abstract void end(T targetCounsumer);
 
 	/**
 	 * Adds error reason and a message.
 	 */
-	void add(String reason, String message) {
+	protected void add(String reason, String message) {
 		subErrors.add(new String[] {reason, message});
 	}
 
 	/**
 	 * Adds error reason and a message.
 	 */
-	void add(String... subError) {
+	protected void add(String... subError) {
 		if (subError.length != 2) {
 			throw new IllegalArgumentException();
 		}
@@ -143,7 +141,7 @@ abstract class ErrorData<T> {
 		subErrors.add(subError);
 	}
 
-	void set(
+	protected void set(
 		int statusCode, String statusMessage, String defaultMessage) {
 
 		this.statusCode = statusCode;

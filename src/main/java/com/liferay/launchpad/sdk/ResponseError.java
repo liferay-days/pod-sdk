@@ -90,7 +90,7 @@ public class ResponseError {
 	private static ErrorData<Response> newResponseErrorData() {
 		return new ErrorData<Response>() {
 			@Override
-			void end(Response response) {
+			protected void end(Response response) {
 				response.status(statusCode(), statusMessage());
 
 				String errorBody = errorBody();
