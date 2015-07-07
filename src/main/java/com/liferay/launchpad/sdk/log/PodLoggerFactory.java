@@ -36,7 +36,7 @@ public class PodLoggerFactory {
 
 		ClassLoader classLoader = clazz.getClassLoader();
 
-		Class podLoggerClass;
+		Class podLoggerClass = null;
 
 		try {
 			podLoggerClass = classLoader.loadClass(

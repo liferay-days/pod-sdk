@@ -33,14 +33,15 @@ public class Error404 {
 		if (message == null) {
 			message = "Not Found";
 		}
-		this.errorResponse = new ResponseError.ErrorResponse(404, message);
+
+		this.errorData = new ErrorData(404, message);
 	}
 
 	/**
 	 * Shortcut for {@link #notFound()}.
 	 */
 	public void end(Response response) {
-		errorResponse.end(response);
+		errorData.end(response);
 	}
 
 	public Error404 notFound() {
@@ -52,14 +53,14 @@ public class Error404 {
 	}
 
 	public Error404 error(String reason, String message) {
-		errorResponse.add(reason, message);
+		errorData.add(reason, message);
 		return this;
 	}
 
 	private Error404 error(int index) {
-		errorResponse.add(VALS[index]);
+		errorData.add(VALS[index]);
 		return this;
 	}
 
-	private final ResponseError.ErrorResponse errorResponse;
+	private final ErrorData errorData;
 }

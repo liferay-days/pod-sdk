@@ -46,14 +46,15 @@ public class Error403 {
 		if (message == null) {
 			message = "Forbidden";
 		}
-		this.errorResponse = new ResponseError.ErrorResponse(403, message);
+
+		this.errorData = new ErrorData(403, message);
 	}
 
 	/**
 	 * Shortcut for {@link #forbidden()}.
 	 */
 	public void end(Response response) {
-		errorResponse.end(response);
+		errorData.end(response);
 	}
 
 	public Error403 forbidden() {
@@ -81,14 +82,14 @@ public class Error403 {
 	}
 
 	public Error403 error(String reason, String message) {
-		errorResponse.add(reason, message);
+		errorData.add(reason, message);
 		return this;
 	}
 
 	private Error403 error(int index) {
-		errorResponse.add(VALS[index]);
+		errorData.add(VALS[index]);
 		return this;
 	}
 
-	private final ResponseError.ErrorResponse errorResponse;
+	private final ErrorData errorData;
 }

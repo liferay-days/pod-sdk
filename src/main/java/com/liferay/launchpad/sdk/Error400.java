@@ -67,11 +67,12 @@ public class Error400 {
 		if (message == null) {
 			message = "Bad Request";
 		}
-		this.errorResponse = new ResponseError.ErrorResponse(400, message);
+
+		this.errorData = new ErrorData(400, message);
 	}
 
 	public void end(Response response) {
-		errorResponse.end(response);
+		errorData.end(response);
 	}
 
 	public Error400 badRequest() {
@@ -111,14 +112,14 @@ public class Error400 {
 	}
 
 	public Error400 error(String reason, String message) {
-		errorResponse.add(reason, message);
+		errorData.add(reason, message);
 		return this;
 	}
 
 	private Error400 error(int index) {
-		errorResponse.add(VALS[index]);
+		errorData.add(VALS[index]);
 		return this;
 	}
 
-	private final ResponseError.ErrorResponse errorResponse;
+	private final ErrorData errorData;
 }

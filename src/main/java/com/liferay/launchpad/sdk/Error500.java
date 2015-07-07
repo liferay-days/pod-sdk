@@ -27,14 +27,15 @@ public class Error500 {
 		if (message == null) {
 			message = "Internal Server Error";
 		}
-		this.errorResponse = new ResponseError.ErrorResponse(500, message);
+
+		this.errorData = new ErrorData(500, message);
 	}
 
 	/**
 	 * Shortcut for {@link #internalError()}.
 	 */
 	public void end(Response response) {
-		errorResponse.end(response);
+		errorData.end(response);
 	}
 
 	public Error500 internalError() {
@@ -42,15 +43,15 @@ public class Error500 {
 	}
 
 	public Error500 error(String reason, String message) {
-		errorResponse.add(reason, message);
+		errorData.add(reason, message);
 		return this;
 	}
 
 	private Error500 error(int index) {
-		errorResponse.add(VALS[index]);
+		errorData.add(VALS[index]);
 		return this;
 	}
 
-	private final ResponseError.ErrorResponse errorResponse;
+	private final ErrorData errorData;
 
 }

@@ -12,19 +12,10 @@
 
 package com.liferay.launchpad.sdk;
 
-import java.util.LinkedList;
-
 /**
  * Main class for building response errors.
  */
 public class ResponseError {
-
-	/**
-	 * Creates error 400 response.
-	 */
-	public static Error400 badRequest(String message) {
-		return new Error400(message);
-	}
 
 	/**
 	 * Creates error 400 response.
@@ -34,10 +25,10 @@ public class ResponseError {
 	}
 
 	/**
-	 * Creates error 403 response.
+	 * Creates error 400 response.
 	 */
-	public static Error403 forbidden(String message) {
-		return new Error403(message);
+	public static Error400 badRequest(String message) {
+		return new Error400(message);
 	}
 
 	/**
@@ -48,31 +39,17 @@ public class ResponseError {
 	}
 
 	/**
-	 * Creates error 404 response.
+	 * Creates error 403 response.
 	 */
-	public static Error404 notFound(String message) {
-		return new Error404(message);
+	public static Error403 forbidden(String message) {
+		return new Error403(message);
 	}
 
 	/**
-	 * Creates error 404 response.
+	 * Creates error 500 response.
 	 */
-	public static Error404 notFound() {
-		return new Error404(null);
-	}
-
-	/**
-	 * Creates error 405 response.
-	 */
-	public static Error405 methodNotAllowed(String message) {
-		return new Error405(message);
-	}
-
-	/**
-	 * Creates error 405 response.
-	 */
-	public static Error405 methodNotAllowed() {
-		return new Error405(null);
+	public static Error500 internalError() {
+		return new Error500(null);
 	}
 
 	/**
@@ -83,123 +60,31 @@ public class ResponseError {
 	}
 
 	/**
-	 * Creates error 500 response.
+	 * Creates error 405 response.
 	 */
-	public static Error500 internalError() {
-		return new Error500(null);
+	public static Error405 methodNotAllowed() {
+		return new Error405(null);
 	}
 
-	static class ErrorResponse {
+	/**
+	 * Creates error 405 response.
+	 */
+	public static Error405 methodNotAllowed(String message) {
+		return new Error405(message);
+	}
 
-		ErrorResponse(int statusCode, String statusMessage) {
-			this.statusCode = statusCode;
-			this.statusMessage = statusMessage;
-		}
+	/**
+	 * Creates error 404 response.
+	 */
+	public static Error404 notFound() {
+		return new Error404(null);
+	}
 
-		private final int statusCode;
-		private final String statusMessage;
-		private final LinkedList<String[]> subErrors = new LinkedList<>();
-
-		public void add(String reason, String message) {
-			subErrors.add(new String[] {reason, message});
-		}
-		public void add(String... subError) {
-			if (subError.length != 2) {
-				throw new IllegalArgumentException();
-			}
-			subErrors.add(subError);
-		}
-
-		/**
-		 * Ends the error response.
-		 */
-		public void end(Response response) {
-			response.status(statusCode, statusMessage);
-
-			StringBuilder errorBody = new StringBuilder();
-
-			errorBody.append("{\n\t\"code\": ");
-			errorBody.append(statusCode);
-			errorBody.append(",\n");
-			errorBody.append("\t\"message\": \"");
-			errorBody.append(encodeString(statusMessage));
-			errorBody.append("\"");
-
-			if (!subErrors.isEmpty()) {
-				errorBody.append(",\n");
-				errorBody.append("\t\"errors\": [\n");
-
-				for (int i = 0; i < subErrors.size(); i++) {
-					String[] subError = subErrors.get(i);
-
-					if ( i != 0) {
-						errorBody.append(",\n");
-					}
-					errorBody.append("\t\t{\n");
-					errorBody.append("\t\t\t\"reason\": \"");
-					errorBody.append(encodeString(subError[0]));
-					errorBody.append("\",\n");
-					errorBody.append("\t\t\t\"message\": \"");
-					errorBody.append(encodeString(subError[1]));
-					errorBody.append("\"\n");
-					errorBody.append("\t\t}");
-				}
-
-				errorBody.append("\n\t]\n");
-			}
-			else {
-				errorBody.append("\n");
-			}
-			errorBody.append("}");
-
-			response
-				.contentType(ContentType.JSON)
-				.body(errorBody.toString());
-		}
-
-		/**
-		 * Encode input to JSON-safe string.
-		 */
-		private String encodeString(String value) {
-			StringBuilder sb = new StringBuilder();
-
-			int len = value.length();
-
-			for (int i = 0; i < len; i++) {
-				char c = value.charAt(i);
-
-				switch (c) {
-					case '"':
-						sb.append("\\\"");
-						break;
-					case '\\':
-						sb.append("\\\\");
-						break;
-					case '/':
-						sb.append("\\/");
-						break;
-					case '\b':
-						sb.append("\\b");
-						break;
-					case '\f':
-						sb.append("\\f");
-						break;
-					case '\n':
-						sb.append("\\n");
-						break;
-					case '\r':
-						sb.append("\\r");
-						break;
-					case '\t':
-						sb.append("\\t");
-						break;
-					default:
-						sb.append(c);
-				}
-			}
-
-			return sb.toString();
-		}
+	/**
+	 * Creates error 404 response.
+	 */
+	public static Error404 notFound(String message) {
+		return new Error404(message);
 	}
 
 }

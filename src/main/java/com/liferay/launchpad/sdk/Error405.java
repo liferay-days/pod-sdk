@@ -28,14 +28,15 @@ public class Error405 {
 		if (message == null) {
 			message = "Method Not Allowed";
 		}
-		this.errorResponse = new ResponseError.ErrorResponse(405, message);
+
+		this.errorData = new ErrorData(405, message);
 	}
 
 	/**
 	 * Shortcut for {@link #httpMethodNotAllowed()}.
 	 */
 	public void end(Response response) {
-		errorResponse.end(response);
+		errorData.end(response);
 	}
 
 	public Error405 httpMethodNotAllowed() {
@@ -43,15 +44,15 @@ public class Error405 {
 	}
 
 	public Error405 error(String reason, String message) {
-		errorResponse.add(reason, message);
+		errorData.add(reason, message);
 		return this;
 	}
 
 	private Error405 error(int index) {
-		errorResponse.add(VALS[index]);
+		errorData.add(VALS[index]);
 		return this;
 	}
 
-	private final ResponseError.ErrorResponse errorResponse;
+	private final ErrorData errorData;
 
 }

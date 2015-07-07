@@ -344,7 +344,7 @@ class PodMultiMapImpl implements PodMultiMap {
 		// update the hash table
 
 		MapEntry e = entries[index];
-		MapEntry newEntry;
+		MapEntry newEntry = null;
 		entries[index] = newEntry = new MapEntry(hash, name, value);
 		newEntry.next = e;
 
@@ -415,8 +415,8 @@ class PodMultiMapImpl implements PodMultiMap {
 
 		final int hash;
 		final String key;
-		String value;
-		MapEntry next;
+		String value = null;
+		MapEntry next = null;
 		MapEntry before, after;
 
 		private MapEntry(int hash, String key, String value) {
