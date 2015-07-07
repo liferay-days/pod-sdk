@@ -39,7 +39,11 @@ public class Error403<T> {
 			"unknownAuth",
 			"The API server does not recognize the authorization scheme used" +
 				" for the request."
-		}
+		},
+		{	// 6
+			"corsRequestOrigin", "The CORS request is from an unknown origin."
+		},
+
 	};
 
 	public Error403(ErrorData<T> errorData, String message) {
@@ -74,6 +78,11 @@ public class Error403<T> {
 	public Error403<T> unknownAuth() {
 		return error(5);
 	}
+
+	public Error403<T> corsRequestOrigin() {
+		return error(6);
+	}
+
 
 	public Error403<T> error(String reason, String message) {
 		errorData.add(reason, message);

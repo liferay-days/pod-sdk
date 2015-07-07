@@ -27,36 +27,33 @@ public class Error400<T> {
 				" part of a multipart request is not supported."
 		},
 		{	// 2
-			"corsRequestOrigin", "The CORS request is from an unknown origin."
-		},
-		{	// 3
 			"invalidQuery",
 			"The request is invalid. Check the API documentation to determine" +
 				" what parameters are supported for the request and to see if" +
 				" the request contains an invalid combination of parameters" +
 				" or an invalid parameter value."
 		},
-		{	// 4
+		{	// 3
 			"invalidDocumentValue",
 			"The request failed because it contained an invalid parameter or" +
 				" parameter value for the document. Review the API" +
 				" documentation to determine which parameters are valid for" +
 				" your request."
 		},
-		{	// 5
+		{	// 4
 			"keyExpired",
 			"The API key provided in the request expired, which means the API" +
 				"server is unable to make the request."
 		},
-		{	// 6
+		{	// 5
 			"keyInvalid",
 			"The API key provided in the request is invalid, which means the" +
 				" API server is unable to make the request."
 		},
-		{	// 7
+		{	// 6
 			"parseError", "The API server cannot parse the request body."
 		},
-		{	// 8
+		{	// 7
 			"required",
 			"The API request is missing required information. The required" +
 				" information could be a parameter or resource property."
@@ -80,32 +77,28 @@ public class Error400<T> {
 		return error(1);
 	}
 
-	public Error400<T> corsRequestOrigin() {
+	public Error400<T> invalidQuery() {
 		return error(2);
 	}
 
-	public Error400<T> invalidQuery() {
+	public Error400<T> invalidDocumentValue() {
 		return error(3);
 	}
 
-	public Error400<T> invalidDocumentValue() {
+	public Error400<T> keyExpired() {
 		return error(4);
 	}
 
-	public Error400<T> keyExpired() {
+	public Error400<T> keyInvalid() {
 		return error(5);
 	}
 
-	public Error400<T> keyInvalid() {
+	public Error400<T> parseError() {
 		return error(6);
 	}
 
-	public Error400<T> parseError() {
-		return error(7);
-	}
-
 	public Error400<T> required() {
-		return error(8);
+		return error(7);
 	}
 
 	public Error400<T> error(String reason, String message) {

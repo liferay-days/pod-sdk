@@ -31,7 +31,6 @@ Error code           | Description
 ------------         | -------------
 badRequest           | The API request is invalid or improperly formed.
 badContent           | The content type of the request data or the content type of a part of a multipart request is not supported.
-corsRequestOrigin    | The CORS request is from an unknown origin.
 invalidQuery         | The request is invalid. Check the API documentation to determine what parameters are supported for the request and to see if the request contains an invalid combination of parameters or an invalid parameter value.
 invalidDocumentValue | The request failed because it contained an invalid parameter or parameter value for the document. Review the API documentation to determine which parameters are valid for your request.
 keyExpired           | The API key provided in the request expired, which means the API server is unable to make the request.
@@ -51,6 +50,7 @@ quotaExceeded        | The requested operation requires more resources than the 
 rateLimitExceeded    | Too many requests have been sent within a given time span.
 responseTooLarge     | The requested resource is too large to return.
 unknownAuth          | The API server does not recognize the authorization scheme used for the request.
+corsRequestOrigin    | The CORS request is from an unknown origin.
 
 ## 404 Not Found
 
