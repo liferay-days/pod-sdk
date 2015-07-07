@@ -20,53 +20,53 @@ import java.util.Map;
 public interface PodSession {
 
 	/**
-	 * Returns the unique ID of the session.
-	 */
-	String id();
-
-	/**
-	 * Put some data in a session.
-	 */
-	PodSession put(String key, Object value);
-
-	/**
-	 * Get some data from the session.
-	 */
-	<T> T get(String key);
-
-	/**
-	 * Removes some data from the session.
-	 */
-	<T> T remove(String key);
-
-	/**
 	 * Returns the session data as {@link java.util.Map}.
 	 */
-	Map<String, Object> data();
-
-	/**
-	 * Returns the time the session was last accessed.
-	 */
-	long lastAccessed();
+	public Map<String, Object> data();
 
 	/**
 	 * Mark the session to be destroyed.
 	 */
-	void destroy();
+	public void destroy();
+
+	/**
+	 * Get some data from the session.
+	 */
+	public <T> T get(String key);
+
+	/**
+	 * Returns the unique ID of the session.
+	 */
+	public String id();
 
 	/**
 	 * Return true is the session was marked to be destroyed.
 	 */
-	boolean isDestroyed();
+	public boolean isDestroyed();
 
 	/**
-	 * Return the amount of time in ms until the session will expire if not accessed.
+	 * Returns the time the session was last accessed.
 	 */
-	long timeout();
+	public long lastAccessed();
+
+	/**
+	 * Put some data in a session.
+	 */
+	public PodSession put(String key, Object value);
+
+	/**
+	 * Removes some data from the session.
+	 */
+	public <T> T remove(String key);
 
 	/**
 	 * Mark the session as being accessed.
 	 */
-	void setAccessed();
+	public void setAccessed();
+
+	/**
+	 * Return the amount of time in ms until the session will expire if not accessed.
+	 */
+	public long timeout();
 
 }
