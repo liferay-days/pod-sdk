@@ -20,71 +20,86 @@ public class ResponseError {
 	/**
 	 * Creates error 400 response.
 	 */
-	public static Error400 badRequest() {
-		return new Error400(null);
+	public static Error400<Response> badRequest() {
+		return new Error400<>(newResponseErrorData(), null);
 	}
 
 	/**
 	 * Creates error 400 response.
 	 */
-	public static Error400 badRequest(String message) {
-		return new Error400(message);
+	public static Error400<Response> badRequest(String message) {
+		return new Error400<>(newResponseErrorData(), message);
 	}
 
 	/**
 	 * Creates error 403 response.
 	 */
-	public static Error403 forbidden() {
-		return new Error403(null);
+	public static Error403<Response> forbidden() {
+		return new Error403<>(newResponseErrorData(), null);
 	}
 
 	/**
 	 * Creates error 403 response.
 	 */
-	public static Error403 forbidden(String message) {
-		return new Error403(message);
+	public static Error403<Response> forbidden(String message) {
+		return new Error403<>(newResponseErrorData(), message);
 	}
 
 	/**
 	 * Creates error 500 response.
 	 */
-	public static Error500 internalError() {
-		return new Error500(null);
+	public static Error500<Response> internalError() {
+		return new Error500<>(newResponseErrorData(), null);
 	}
 
 	/**
 	 * Creates error 500 response.
 	 */
-	public static Error500 internalError(String message) {
-		return new Error500(message);
+	public static Error500<Response> internalError(String message) {
+		return new Error500<>(newResponseErrorData(), message);
 	}
 
 	/**
 	 * Creates error 405 response.
 	 */
-	public static Error405 methodNotAllowed() {
-		return new Error405(null);
+	public static Error405<Response> methodNotAllowed() {
+		return new Error405<>(newResponseErrorData(), null);
 	}
 
 	/**
 	 * Creates error 405 response.
 	 */
-	public static Error405 methodNotAllowed(String message) {
-		return new Error405(message);
+	public static Error405<Response> methodNotAllowed(String message) {
+		return new Error405<>(newResponseErrorData(), message);
 	}
 
 	/**
 	 * Creates error 404 response.
 	 */
-	public static Error404 notFound() {
-		return new Error404(null);
+	public static Error404<Response> notFound() {
+		return new Error404<>(newResponseErrorData(), null);
 	}
 
 	/**
 	 * Creates error 404 response.
 	 */
-	public static Error404 notFound(String message) {
-		return new Error404(message);
+	public static Error404<Response> notFound(String message) {
+		return new Error404<>(newResponseErrorData(), message);
+	}
+
+	private static ErrorData<Response> newResponseErrorData() {
+		return new ErrorData<Response>() {
+			@Override
+			void end(Response response) {
+				response.status(statusCode(), statusMessage());
+
+				String errorBody = errorBody();
+
+				response
+					.contentType(ContentType.JSON)
+					.body(errorBody);
+			}
+		};
 	}
 
 }

@@ -15,7 +15,7 @@ package com.liferay.launchpad.sdk;
 /**
  * Error 400 errors.
  */
-public class Error400 {
+public class Error400<T> {
 
 	public static final String[][] VALS = {
 		{	//0
@@ -63,63 +63,60 @@ public class Error400 {
 		}
 	};
 
-	Error400(String message) {
-		if (message == null) {
-			message = "Bad Request";
-		}
-
-		this.errorData = new ErrorData(400, message);
+	Error400(ErrorData<T> errorData, String message) {
+		this.errorData = errorData;
+		this.errorData.set(400, message, "Bad Request");
 	}
 
-	public void end(Response response) {
+	public void end(T response) {
 		errorData.end(response);
 	}
 
-	public Error400 badRequest() {
+	public Error400<T> badRequest() {
 		return error(0);
 	}
 
-	public Error400 badContent() {
+	public Error400<T> badContent() {
 		return error(1);
 	}
 
-	public Error400 corsRequestOrigin() {
+	public Error400<T> corsRequestOrigin() {
 		return error(2);
 	}
 
-	public Error400 invalidQuery() {
+	public Error400<T> invalidQuery() {
 		return error(3);
 	}
 
-	public Error400 invalidDocumentValue() {
+	public Error400<T> invalidDocumentValue() {
 		return error(4);
 	}
 
-	public Error400 keyExpired() {
+	public Error400<T> keyExpired() {
 		return error(5);
 	}
 
-	public Error400 keyInvalid() {
+	public Error400<T> keyInvalid() {
 		return error(6);
 	}
 
-	public Error400 parseError() {
+	public Error400<T> parseError() {
 		return error(7);
 	}
 
-	public Error400 required() {
+	public Error400<T> required() {
 		return error(8);
 	}
 
-	public Error400 error(String reason, String message) {
+	public Error400<T> error(String reason, String message) {
 		errorData.add(reason, message);
 		return this;
 	}
 
-	private Error400 error(int index) {
+	private Error400<T> error(int index) {
 		errorData.add(VALS[index]);
 		return this;
 	}
 
-	private final ErrorData errorData;
+	private final ErrorData<T> errorData;
 }

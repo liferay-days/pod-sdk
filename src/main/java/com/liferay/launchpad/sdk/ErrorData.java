@@ -1,52 +1,24 @@
+/**
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under the terms of the
+ * GNU Lesser General Public License as published by the Free Software Foundation; either version
+ * 2.1 of the License, or (at your option) any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
+ * even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
 package com.liferay.launchpad.sdk;
 
 import java.util.LinkedList;
-class ErrorData {
-
-	ErrorData(int statusCode, String statusMessage) {
-		this.statusCode = statusCode;
-		this.statusMessage = statusMessage;
-	}
-
-	private final int statusCode;
-	private final String statusMessage;
-	private final LinkedList<String[]> subErrors = new LinkedList<>();
-
-	/**
-	 * Adds error reason and a message.
-	 */
-	public void add(String reason, String message) {
-		subErrors.add(new String[] {reason, message});
-	}
-
-	/**
-	 * Adds error reason and a message.
-	 */
-	public void add(String... subError) {
-		if (subError.length != 2) {
-			throw new IllegalArgumentException();
-		}
-
-		subErrors.add(subError);
-	}
-
-	/**
-	 * Ends the error response.
-	 */
-	public void end(Response response) {
-		response.status(statusCode, statusMessage);
-
-		String errorBody = errorBody();
-
-		response
-			.contentType(ContentType.JSON)
-			.body(errorBody);
-	}
+abstract class ErrorData<T> {
 
 	/**
 	 * Creates body string.
 	 */
-	private String errorBody() {
+	public String errorBody() {
 		StringBuilder errorBody = new StringBuilder();
 
 		errorBody.append("{\n\t\"code\": ");
@@ -86,6 +58,20 @@ class ErrorData {
 		errorBody.append("}");
 
 		return errorBody.toString();
+	}
+
+	/**
+	 * Returns status code.
+	 */
+	public int statusCode() {
+		return statusCode;
+	}
+
+	/**
+	 * Returns status message.
+	 */
+	public String statusMessage() {
+		return statusMessage;
 	}
 
 	/**
@@ -131,4 +117,46 @@ class ErrorData {
 
 		return sb.toString();
 	}
+
+	ErrorData() {}
+
+	/**
+	 * Ends the error response.
+	 */
+	abstract void end(T targetCounsumer);
+
+	/**
+	 * Adds error reason and a message.
+	 */
+	void add(String reason, String message) {
+		subErrors.add(new String[] {reason, message});
+	}
+
+	/**
+	 * Adds error reason and a message.
+	 */
+	void add(String... subError) {
+		if (subError.length != 2) {
+			throw new IllegalArgumentException();
+		}
+
+		subErrors.add(subError);
+	}
+
+	void set(
+		int statusCode, String statusMessage, String defaultMessage) {
+
+		this.statusCode = statusCode;
+
+		if (statusMessage == null) {
+			statusMessage = defaultMessage;
+		}
+
+		this.statusMessage = statusMessage;
+	}
+
+	private int statusCode;
+	private String statusMessage;
+	private final LinkedList<String[]> subErrors = new LinkedList<>();
+
 }

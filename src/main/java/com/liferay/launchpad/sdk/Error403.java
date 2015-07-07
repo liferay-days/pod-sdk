@@ -12,7 +12,7 @@
 
 package com.liferay.launchpad.sdk;
 
-public class Error403 {
+public class Error403<T> {
 
 	public static final String[][] VALS = {
 		{	//0
@@ -42,54 +42,48 @@ public class Error403 {
 		}
 	};
 
-	Error403(String message) {
-		if (message == null) {
-			message = "Forbidden";
-		}
-
-		this.errorData = new ErrorData(403, message);
+	Error403(ErrorData<T> errorData, String message) {
+		this.errorData = errorData;
+		this.errorData.set(403, message, "Forbidden");
 	}
 
-	/**
-	 * Shortcut for {@link #forbidden()}.
-	 */
-	public void end(Response response) {
+	public void end(T response) {
 		errorData.end(response);
 	}
 
-	public Error403 forbidden() {
+	public Error403<T> forbidden() {
 		return error(0);
 	}
 
-	public Error403 limitExceeded() {
+	public Error403<T> limitExceeded() {
 		return error(1);
 	}
 
-	public Error403 quotaExceeded() {
+	public Error403<T> quotaExceeded() {
 		return error(2);
 	}
 
-	public Error403 rateLimitExceeded() {
+	public Error403<T> rateLimitExceeded() {
 		return error(3);
 	}
 
-	public Error403 responseTooLarge() {
+	public Error403<T> responseTooLarge() {
 		return error(4);
 	}
 
-	public Error403 unknownAuth() {
+	public Error403<T> unknownAuth() {
 		return error(5);
 	}
 
-	public Error403 error(String reason, String message) {
+	public Error403<T> error(String reason, String message) {
 		errorData.add(reason, message);
 		return this;
 	}
 
-	private Error403 error(int index) {
+	private Error403<T> error(int index) {
 		errorData.add(VALS[index]);
 		return this;
 	}
 
-	private final ErrorData errorData;
+	private final ErrorData<T> errorData;
 }

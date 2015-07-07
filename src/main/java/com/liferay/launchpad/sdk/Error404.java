@@ -15,7 +15,7 @@ package com.liferay.launchpad.sdk;
 /**
  * Error 404 errors.
  */
-public class Error404 {
+public class Error404<T> {
 
 	public static final String[][] VALS = {
 		{	//0
@@ -29,38 +29,32 @@ public class Error404 {
 		}
 	};
 
-	Error404(String message) {
-		if (message == null) {
-			message = "Not Found";
-		}
-
-		this.errorData = new ErrorData(404, message);
+	Error404(ErrorData<T> errorData, String message) {
+		this.errorData = errorData;
+		this.errorData.set(404, message, "Not Found");
 	}
 
-	/**
-	 * Shortcut for {@link #notFound()}.
-	 */
-	public void end(Response response) {
+	public void end(T response) {
 		errorData.end(response);
 	}
 
-	public Error404 notFound() {
+	public Error404<T> notFound() {
 		return error(0);
 	}
 
-	public Error404 unsupportedProtocol() {
+	public Error404<T> unsupportedProtocol() {
 		return error(1);
 	}
 
-	public Error404 error(String reason, String message) {
+	public Error404<T> error(String reason, String message) {
 		errorData.add(reason, message);
 		return this;
 	}
 
-	private Error404 error(int index) {
+	private Error404<T> error(int index) {
 		errorData.add(VALS[index]);
 		return this;
 	}
 
-	private final ErrorData errorData;
+	private final ErrorData<T> errorData;
 }
