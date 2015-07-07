@@ -24,7 +24,7 @@ public class Error405<T> {
 		}
 	};
 
-	Error405(ErrorData<T> errorData, String message) {
+	public Error405(ErrorData<T> errorData, String message) {
 		this.errorData = errorData;
 		this.errorData.set(405, message, "Method Not Allowed");
 	}

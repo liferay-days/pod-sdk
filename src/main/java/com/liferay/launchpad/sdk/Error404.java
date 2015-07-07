@@ -29,7 +29,7 @@ public class Error404<T> {
 		}
 	};
 
-	Error404(ErrorData<T> errorData, String message) {
+	public Error404(ErrorData<T> errorData, String message) {
 		this.errorData = errorData;
 		this.errorData.set(404, message, "Not Found");
 	}

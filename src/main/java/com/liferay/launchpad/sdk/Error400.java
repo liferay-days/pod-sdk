@@ -63,7 +63,7 @@ public class Error400<T> {
 		}
 	};
 
-	Error400(ErrorData<T> errorData, String message) {
+	public Error400(ErrorData<T> errorData, String message) {
 		this.errorData = errorData;
 		this.errorData.set(400, message, "Bad Request");
 	}

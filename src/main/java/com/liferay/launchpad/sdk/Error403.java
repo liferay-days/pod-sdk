@@ -42,7 +42,7 @@ public class Error403<T> {
 		}
 	};
 
-	Error403(ErrorData<T> errorData, String message) {
+	public Error403(ErrorData<T> errorData, String message) {
 		this.errorData = errorData;
 		this.errorData.set(403, message, "Forbidden");
 	}

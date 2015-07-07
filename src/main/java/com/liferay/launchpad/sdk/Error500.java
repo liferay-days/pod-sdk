@@ -23,7 +23,7 @@ public class Error500<T> {
 		}
 	};
 
-	Error500(ErrorData<T> errorData, String message) {
+	public Error500(ErrorData<T> errorData, String message) {
 		this.errorData = errorData;
 		this.errorData.set(500, message, "Internal Server Error");
 	}
