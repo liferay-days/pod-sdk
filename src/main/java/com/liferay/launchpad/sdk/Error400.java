@@ -15,7 +15,7 @@ package com.liferay.launchpad.sdk;
 /**
  * Error 400 errors.
  */
-public class Error400<T> {
+public class Error400<T> extends ErrorBase<T, Error400<T>> {
 
 	public static final String[][] VALS = {
 		{	//0
@@ -61,55 +61,76 @@ public class Error400<T> {
 	};
 
 	public Error400(ErrorData<T> errorData, String message) {
-		this.errorData = errorData;
-		this.errorData.set(400, message, "Bad Request");
-	}
-
-	public void end(T response) {
-		errorData.end(response);
-	}
-
-	public Error400<T> badRequest() {
-		return error(0);
+		super(errorData, 400, message, "Bad Request");
 	}
 
 	public Error400<T> badContent() {
 		return error(1);
 	}
 
-	public Error400<T> invalidQuery() {
-		return error(2);
+	public Error400<T> badContent(String message) {
+		return error(1, message);
+	}
+
+	public Error400<T> badRequest() {
+		return error(0);
+	}
+
+	public Error400<T> badRequest(String message) {
+		return error(0, message);
 	}
 
 	public Error400<T> invalidDocumentValue() {
 		return error(3);
 	}
 
+	public Error400<T> invalidDocumentValue(String message) {
+		return error(3, message);
+	}
+
+	public Error400<T> invalidQuery() {
+		return error(2);
+	}
+
+	public Error400<T> invalidQuery(String message) {
+		return error(2, message);
+	}
+
 	public Error400<T> keyExpired() {
 		return error(4);
+	}
+
+	public Error400<T> keyExpired(String message) {
+		return error(4, message);
 	}
 
 	public Error400<T> keyInvalid() {
 		return error(5);
 	}
 
+	public Error400<T> keyInvalid(String message) {
+		return error(5, message);
+	}
+
 	public Error400<T> parseError() {
 		return error(6);
+	}
+
+	public Error400<T> parseError(String message) {
+		return error(6, message);
 	}
 
 	public Error400<T> required() {
 		return error(7);
 	}
 
-	public Error400<T> error(String reason, String message) {
-		errorData.add(reason, message);
-		return this;
+	public Error400<T> required(String message) {
+		return error(7, message);
 	}
 
-	private Error400<T> error(int index) {
-		errorData.add(VALS[index]);
-		return this;
+	@Override
+	protected String[] vals(int index) {
+		return VALS[index];
 	}
 
-	private final ErrorData<T> errorData;
 }

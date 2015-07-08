@@ -15,7 +15,7 @@ package com.liferay.launchpad.sdk;
 /**
  * Error 404 errors.
  */
-public class Error404<T> {
+public class Error404<T> extends ErrorBase<T, Error404<T>> {
 
 	public static final String[][] VALS = {
 		{	//0
@@ -30,31 +30,28 @@ public class Error404<T> {
 	};
 
 	public Error404(ErrorData<T> errorData, String message) {
-		this.errorData = errorData;
-		this.errorData.set(404, message, "Not Found");
-	}
-
-	public void end(T response) {
-		errorData.end(response);
+		super(errorData, 404, message, "Not Found");
 	}
 
 	public Error404<T> notFound() {
 		return error(0);
 	}
 
+	public Error404<T> notFound(String message) {
+		return error(0, message);
+	}
+
 	public Error404<T> unsupportedProtocol() {
 		return error(1);
 	}
 
-	public Error404<T> error(String reason, String message) {
-		errorData.add(reason, message);
-		return this;
+	public Error404<T> unsupportedProtocol(String message) {
+		return error(1, message);
 	}
 
-	private Error404<T> error(int index) {
-		errorData.add(VALS[index]);
-		return this;
+	@Override
+	protected String[] vals(int index) {
+		return VALS[index];
 	}
 
-	private final ErrorData<T> errorData;
 }

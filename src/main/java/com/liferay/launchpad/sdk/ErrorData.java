@@ -75,6 +75,41 @@ public abstract class ErrorData<T> {
 	}
 
 	/**
+	 * Adds error reason and a message.
+	 */
+	protected void add(String... subError) {
+		if (subError.length != 2) {
+			throw new IllegalArgumentException();
+		}
+
+		subErrors.add(subError);
+	}
+
+	/**
+	 * Adds error reason and a message.
+	 */
+	protected void add(String reason, String message) {
+		subErrors.add(new String[] {reason, message});
+	}
+
+	/**
+	 * Ends the error response.
+	 */
+	protected abstract void end(T targetCounsumer);
+
+	protected void set(
+		int statusCode, String statusMessage, String defaultMessage) {
+
+		this.statusCode = statusCode;
+
+		if (statusMessage == null) {
+			statusMessage = defaultMessage;
+		}
+
+		this.statusMessage = statusMessage;
+	}
+
+	/**
 	 * Encodes input to JSON-safe string.
 	 */
 	private String encodeString(String value) {
@@ -116,41 +151,6 @@ public abstract class ErrorData<T> {
 		}
 
 		return sb.toString();
-	}
-
-	/**
-	 * Ends the error response.
-	 */
-	protected abstract void end(T targetCounsumer);
-
-	/**
-	 * Adds error reason and a message.
-	 */
-	protected void add(String reason, String message) {
-		subErrors.add(new String[] {reason, message});
-	}
-
-	/**
-	 * Adds error reason and a message.
-	 */
-	protected void add(String... subError) {
-		if (subError.length != 2) {
-			throw new IllegalArgumentException();
-		}
-
-		subErrors.add(subError);
-	}
-
-	protected void set(
-		int statusCode, String statusMessage, String defaultMessage) {
-
-		this.statusCode = statusCode;
-
-		if (statusMessage == null) {
-			statusMessage = defaultMessage;
-		}
-
-		this.statusMessage = statusMessage;
 	}
 
 	private int statusCode;

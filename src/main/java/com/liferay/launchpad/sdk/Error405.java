@@ -15,7 +15,7 @@ package com.liferay.launchpad.sdk;
 /**
  * Error 405 errors
  */
-public class Error405<T> {
+public class Error405<T> extends ErrorBase<T, Error405<T>> {
 
 	public static final String[][] VALS = {
 		{	//0
@@ -25,28 +25,20 @@ public class Error405<T> {
 	};
 
 	public Error405(ErrorData<T> errorData, String message) {
-		this.errorData = errorData;
-		this.errorData.set(405, message, "Method Not Allowed");
-	}
-
-	public void end(T response) {
-		errorData.end(response);
+		super(errorData, 405, message, "Method Not Allowed");
 	}
 
 	public Error405<T> httpMethodNotAllowed() {
 		return error(0);
 	}
 
-	public Error405<T> error(String reason, String message) {
-		errorData.add(reason, message);
-		return this;
+	public Error405<T> httpMethodNotAllowed(String message) {
+		return error(0, message);
 	}
 
-	private Error405<T> error(int index) {
-		errorData.add(VALS[index]);
-		return this;
+	@Override
+	protected String[] vals(int index) {
+		return VALS[index];
 	}
-
-	private final ErrorData<T> errorData;
 
 }

@@ -15,7 +15,7 @@ package com.liferay.launchpad.sdk;
 /**
  * Error 500 errors.
  */
-public class Error500<T> {
+public class Error500<T> extends ErrorBase<T, Error500<T>> {
 
 	public static final String[][] VALS = {
 		{	//0
@@ -24,28 +24,20 @@ public class Error500<T> {
 	};
 
 	public Error500(ErrorData<T> errorData, String message) {
-		this.errorData = errorData;
-		this.errorData.set(500, message, "Internal Server Error");
-	}
-
-	public void end(T response) {
-		errorData.end(response);
+		super(errorData, 500, message, "Internal Server Error");
 	}
 
 	public Error500<T> internalError() {
 		return error(0);
 	}
 
-	public Error500<T> error(String reason, String message) {
-		errorData.add(reason, message);
-		return this;
+	public Error500<T> internalError(String message) {
+		return error(0, message);
 	}
 
-	private Error500<T> error(int index) {
-		errorData.add(VALS[index]);
-		return this;
+	@Override
+	protected String[] vals(int index) {
+		return VALS[index];
 	}
-
-	private final ErrorData<T> errorData;
 
 }

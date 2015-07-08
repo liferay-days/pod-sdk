@@ -12,7 +12,10 @@
 
 package com.liferay.launchpad.sdk;
 
-public class Error403<T> {
+/**
+ * Error 403 errors.
+ */
+public class Error403<T> extends ErrorBase<T, Error403<T>> {
 
 	public static final String[][] VALS = {
 		{	//0
@@ -47,52 +50,68 @@ public class Error403<T> {
 	};
 
 	public Error403(ErrorData<T> errorData, String message) {
-		this.errorData = errorData;
-		this.errorData.set(403, message, "Forbidden");
-	}
-
-	public void end(T response) {
-		errorData.end(response);
-	}
-
-	public Error403<T> forbidden() {
-		return error(0);
-	}
-
-	public Error403<T> limitExceeded() {
-		return error(1);
-	}
-
-	public Error403<T> quotaExceeded() {
-		return error(2);
-	}
-
-	public Error403<T> rateLimitExceeded() {
-		return error(3);
-	}
-
-	public Error403<T> responseTooLarge() {
-		return error(4);
-	}
-
-	public Error403<T> unknownAuth() {
-		return error(5);
+		super(errorData, 403, message, "Forbidden");
 	}
 
 	public Error403<T> corsRequestOrigin() {
 		return error(6);
 	}
 
-
-	public Error403<T> error(String reason, String message) {
-		errorData.add(reason, message);
-		return this;
+	public Error403<T> corsRequestOrigin(String message) {
+		return error(6, message);
 	}
 
-	private Error403<T> error(int index) {
-		errorData.add(VALS[index]);
-		return this;
+	public Error403<T> forbidden() {
+		return error(0);
 	}
 
-	private final ErrorData<T> errorData;
+	public Error403<T> forbidden(String message) {
+		return error(0, message);
+	}
+
+	public Error403<T> limitExceeded() {
+		return error(1);
+	}
+
+	public Error403<T> limitExceeded(String message) {
+		return error(1, message);
+	}
+
+	public Error403<T> quotaExceeded() {
+		return error(2);
+	}
+
+	public Error403<T> quotaExceeded(String message) {
+		return error(2, message);
+	}
+
+	public Error403<T> rateLimitExceeded() {
+		return error(3);
+	}
+
+	public Error403<T> rateLimitExceeded(String message) {
+		return error(3, message);
+	}
+
+	public Error403<T> responseTooLarge() {
+		return error(4);
+	}
+
+	public Error403<T> responseTooLarge(String message) {
+		return error(4, message);
+	}
+
+	public Error403<T> unknownAuth() {
+		return error(5);
+	}
+
+	public Error403<T> unknownAuth(String message) {
+		return error(5, message);
+	}
+
+	@Override
+	protected String[] vals(int index) {
+		return VALS[index];
+	}
+
 }
