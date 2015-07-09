@@ -78,7 +78,6 @@ public class RequestTest {
 	public void testResponse() {
 		RequestImpl request = new RequestImpl("http://127.0.0.1");
 		Response response = new ResponseImpl(request);
-		request.response(response);
 		assertEquals(response, request.response());
 	}
 

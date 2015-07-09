@@ -71,7 +71,7 @@ public class Error400Test {
 	}
 
 	private static Response createResponse() {
-		Request request = new RequestImpl("http://localhost:8080/");
+		RequestImpl request = new RequestImpl("http://localhost:8080/");
 
 		Response response = new ResponseImpl(request);
 
