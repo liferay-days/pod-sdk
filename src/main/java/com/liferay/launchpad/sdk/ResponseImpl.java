@@ -16,13 +16,19 @@ package com.liferay.launchpad.sdk;
  */
 public class ResponseImpl implements Response {
 
-	public ResponseImpl(Request request) {
+	public ResponseImpl(RequestImpl request) {
 		this.request = request;
+		request.response(this);
 	}
 
 	@Override
 	public String body() {
 		return body;
+	}
+
+	@Override
+	public Object bodyObject() {
+		return bodyObject;
 	}
 
 	@Override
@@ -84,7 +90,12 @@ public class ResponseImpl implements Response {
 		return this;
 	}
 
+	void bodyObject(Object bodyObject) {
+		this.bodyObject = bodyObject;
+	}
+
 	protected String body = null;
+	protected Object bodyObject = null;
 	protected PodMultiMap headers = new PodMultiMapImpl();
 	protected Request request;
 	protected int statusCode;

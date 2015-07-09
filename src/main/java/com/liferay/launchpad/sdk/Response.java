@@ -23,6 +23,11 @@ public interface Response {
 	public String body();
 
 	/**
+	 * Returns parsed body content.
+	 */
+	public Object bodyObject();
+
+	/**
 	 * Sets the body content. Body content can be set only once. Setting the
 	 * body {@link #end() closes} the response.
 	 */
