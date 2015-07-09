@@ -27,13 +27,20 @@ public class ResponseImpl implements Response {
 	}
 
 	@Override
-	public <T> T bodyObject() {
-		return (T) bodyObject;
+	public void body(String body) {
+		this.body = body;
 	}
 
 	@Override
-	public void body(String body) {
-		this.body = body;
+	public <T> T bodyObject() {
+		return (T)bodyObject;
+	}
+
+	/**
+	 * Sets the body object.
+	 */
+	public void bodyObject(Object bodyObject) {
+		this.bodyObject = bodyObject;
 	}
 
 	@Override
@@ -88,13 +95,6 @@ public class ResponseImpl implements Response {
 	public Response statusMessage(String statusMessage) {
 		this.statusMessage = statusMessage;
 		return this;
-	}
-
-	/**
-	 * Sets the body object.
-	 */
-	public void bodyObject(Object bodyObject) {
-		this.bodyObject = bodyObject;
 	}
 
 	protected String body = null;
