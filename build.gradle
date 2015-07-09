@@ -13,7 +13,7 @@ plugins {
     id "com.jfrog.bintray" version "1.2"
 }
 
-version = '0.10.2'
+version = '0.10.4'
 group = 'com.liferay.launchpad'
 
 ext {
@@ -64,3 +64,10 @@ artifacts {
 jar.dependsOn sourceJar
 jar.dependsOn javadocJar
 jar.version = version
+
+/**
+ * Gradle wrapper.
+ */
+task wrapper(type: Wrapper) {
+	gradleVersion = '2.5'
+}
