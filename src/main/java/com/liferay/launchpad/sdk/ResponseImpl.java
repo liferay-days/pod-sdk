@@ -90,7 +90,10 @@ public class ResponseImpl implements Response {
 		return this;
 	}
 
-	void bodyObject(Object bodyObject) {
+	/**
+	 * Sets the body object.
+	 */
+	public void bodyObject(Object bodyObject) {
 		this.bodyObject = bodyObject;
 	}
 
