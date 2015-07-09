@@ -23,9 +23,9 @@ public interface Response {
 	public String body();
 
 	/**
-	 * Returns parsed body content.
+	 * Returns parsed {@link #body() body content}.
 	 */
-	public Object bodyObject();
+	public <T> T bodyObject();
 
 	/**
 	 * Sets the body content. Body content can be set only once. Setting the

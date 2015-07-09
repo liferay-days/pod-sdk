@@ -27,8 +27,8 @@ public class ResponseImpl implements Response {
 	}
 
 	@Override
-	public Object bodyObject() {
-		return bodyObject;
+	public <T> T bodyObject() {
+		return (T) bodyObject;
 	}
 
 	@Override
